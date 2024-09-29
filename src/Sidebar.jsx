@@ -16,28 +16,28 @@ export default function Sidebar() {
         <div className="flex flex-col ">
           <img src={logo} alt="logo" className="h-10 object-contain" />
           <div className="flex flex-col mt-3 gap-1 ">
-            <span className="w-full h-[35px] rounded-[6px] hover:bg-[#4263EB] text-black hover:text-white flex items-center text-[14px] font-semibold gap-3">
-              <HiOutlineSquares2X2 className="ml-3 text-[21px] text-[#868E96] hover:text-white" />{" "}
+            <span className="w-full h-[40px] rounded-[6px] hover:bg-[#4263EB] text-black hover:text-white flex items-center text-[15px] font-semibold gap-3">
+              <HiOutlineSquares2X2 className="ml-3 text-[23px] text-[#868E96] hover:text-white" />{" "}
               Dashboard
             </span>
-            <span className="w-full h-[35px] hover:bg-[#4263EB]  rounded-[6px] text-black hover:text-white flex items-center text-[14px] font-semibold gap-3">
-              <PiPaperPlaneTiltBold className="ml-3 text-[21px] text-[#868E96] hover:text-white" />{" "}
+            <span className="w-full h-[40px] hover:bg-[#4263EB]  rounded-[6px] text-black hover:text-white flex items-center text-[15px] font-semibold gap-3">
+              <PiPaperPlaneTiltBold className="ml-3 text-[23px] text-[#868E96] hover:text-white" />{" "}
               Reports
             </span>
-            <span className="w-full h-[35px] hover:bg-[#4263EB]  rounded-[6px] text-black hover:text-white flex items-center text-[14px] font-semibold gap-3">
-              <BiWallet className="ml-3 text-[21px] text-[#868E96] hover:text-white" />{" "}
+            <span className="w-full h-[40px] hover:bg-[#4263EB]  rounded-[6px] text-black hover:text-white flex items-center text-[15px] font-semibold gap-3">
+              <BiWallet className="ml-3 text-[23px] text-[#868E96] hover:text-white" />{" "}
               Wallet
             </span>
-            <span className="w-full h-[35px] hover:bg-[#4263EB]  rounded-[6px] text-black hover:text-white flex items-center text-[14px] font-semibold gap-3">
-              <HiOutlineShoppingCart className="ml-3 text-[21px] text-[#868E96] hover:text-white" />{" "}
+            <span className="w-full h-[40px] hover:bg-[#4263EB]  rounded-[6px] text-black hover:text-white flex items-center text-[15px] font-semibold gap-3">
+              <HiOutlineShoppingCart className="ml-3 text-[23px] text-[#868E96] hover:text-white" />{" "}
               Pricing
             </span>
-            <span className="w-full h-[35px] hover:bg-[#4263EB]  rounded-[6px] text-black hover:text-white flex items-center text-[14px] font-semibold gap-3">
-              <TbChartDonut className="ml-3 text-[21px] text-[#868E96] hover:text-white" />{" "}
+            <span className="w-full h-[40px] hover:bg-[#4263EB]  rounded-[6px] text-black hover:text-white flex items-center text-[15px] font-semibold gap-3">
+              <TbChartDonut className="ml-3 text-[23px] text-[#868E96] hover:text-white" />{" "}
               Profile
             </span>
-            <span className="w-full h-[35px] hover:bg-[#4263EB]  rounded-[6px]  hover:text-white flex items-center text-[14px] font-semibold gap-3">
-              <TbUsers className="ml-3 text-[21px]  group-hover:text-white text-[#868E96]" />{" "}
+            <span className="w-full h-[40px] hover:bg-[#4263EB]  rounded-[6px]  hover:text-white flex items-center text-[15px] font-semibold gap-3">
+              <TbUsers className="ml-3 text-[23px]  group-hover:text-white text-[#868E96]" />{" "}
               Developer
             </span>
           </div>
@@ -45,7 +45,7 @@ export default function Sidebar() {
         <div className="flex flex-col gap-1 ">
           <div className="bg-[#f8fafc] h-[auto] pb-5 w-[95%] rounded-[9px] ">
             <div className=" flex justify-between  px-[10%] pt-4">
-              <span className="text-[14px] font-semibold ">Your plan</span>
+              <span className="text-[15px] font-semibold ">Your plan</span>
               <span>
                 <img src={close} alt="close" className="h-[17px] w-[17px]" />
               </span>
@@ -76,12 +76,12 @@ export default function Sidebar() {
               </div>
             </div>
           </div>
-          <span className="w-full h-[35px] hover:bg-[#4263EB]   rounded-[6px] text-black hover:text-white flex items-center text-[14px] font-semibold gap-3">
-            <MdOutlineSupportAgent className="ml-3 text-[21px]  hover:text-white text-[#868E96]" />{" "}
+          <span className="w-full h-[40px] hover:bg-[#4263EB]   rounded-[6px] text-black hover:text-white flex items-center text-[15px] font-semibold gap-3">
+            <MdOutlineSupportAgent className="ml-3 text-[23px]  hover:text-white text-[#868E96]" />{" "}
             Support
           </span>
-          <span className="w-full h-[35px] hover:bg-[#4263EB]   rounded-[6px] text-black hover:text-white flex items-center text-[14px] font-semibold gap-3">
-            <IoSettingsSharp className="ml-3 text-[21px]  hover:text-white text-[#868E96]" />{" "}
+          <span className="w-full h-[40px] hover:bg-[#4263EB]   rounded-[6px] text-black hover:text-white flex items-center text-[15px] font-semibold gap-3">
+            <IoSettingsSharp className="ml-3 text-[23px]  hover:text-white text-[#868E96]" />{" "}
             Settings
           </span>
         </div>

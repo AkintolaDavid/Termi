@@ -7,7 +7,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 export default function Header() {
   return (
     <div className="w-[100%] border-[#EAECF0] border-b-[1px] bg-white">
-      <div className="h-[78px] flex justify-between items-center px-5 ">
+      <div className="h-[90px] flex justify-between items-center px-5 ">
         <span className="text-[20px]">Welcome Akintola David</span>
 
         <div className="flex items-center">

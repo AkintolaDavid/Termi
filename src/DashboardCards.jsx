@@ -7,14 +7,14 @@ import dots from "./assets/cards/dots.png";
 export default function DashboardCards() {
   return (
     <div className="flex w-[100%] justify-between">
-      <div className=" rounded-[12px] bg-white w-[31%] h-[140px] flex items-center border-[#ECE9FEEA] border-[1px]">
+      <div className=" rounded-[12px] bg-white w-[31%] h-[160px] flex items-center border-[#ECE9FEEA] border-[1px]">
         <div className="w-[90%] flex flex-col ml-[5%] gap-2">
           <div className=" flex  justify-between">
-            <img src={icon1} alt="icon" className="h-[38px] w-[38px]" />{" "}
-            <img src={dots} alt="icon" className="h-[17px] w-[17px]" />
+            <img src={icon1} alt="icon" className="h-[44px] w-[44px]" />{" "}
+            <img src={dots} alt="icon" className="h-[20px] w-[20px]" />
           </div>
           <div>
-            <span className="text-[12px] text-[#495057] font-medium">
+            <span className="text-[14px] text-[#495057] font-medium">
               Wallet Balance
             </span>
           </div>
@@ -26,38 +26,38 @@ export default function DashboardCards() {
           </div>
         </div>
       </div>
-      <div className=" rounded-[12px] bg-white w-[31%] h-[140px] flex items-center border-[#ECE9FEEA] border-[1px]">
+      <div className=" rounded-[12px] bg-white w-[31%] h-[160px] flex items-center border-[#ECE9FEEA] border-[1px]">
         <div className="w-[90%] flex flex-col ml-[5%] gap-2">
           <div className=" flex  justify-between">
-            <img src={icon2} alt="icon" className="h-[38px] w-[38px]" />{" "}
-            <img src={dots} alt="icon" className="h-[17px] w-[17px]" />
+            <img src={icon2} alt="icon" className="h-[44px] w-[44px]" />{" "}
+            <img src={dots} alt="icon" className="h-[20px] w-[20px]" />
           </div>
           <div>
-            <span className="text-[12px] text-[#495057] font-medium">
+            <span className="text-[14px] text-[#495057] font-medium">
               {" "}
               Total SMS Sent{" "}
             </span>
           </div>
           <div className="flex justify-between  items-center">
             <span className="text-[28px] font-semibold">5,691</span>
-            <img src={badge} alt="badge" className="h-[18px] w-50px]" />
+            <img src={badge} alt="badge" className="h-[21px] w-53px]" />
           </div>
         </div>
       </div>
-      <div className=" rounded-[12px] bg-white w-[31%] h-[140px] flex items-center border-[#ECE9FEEA] border-[1px]">
+      <div className=" rounded-[12px] bg-white w-[31%] h-[160px] flex items-center border-[#ECE9FEEA] border-[1px]">
         <div className="w-[90%] flex flex-col ml-[5%] gap-2">
           <div className=" flex  justify-between">
-            <img src={icon3} alt="icon" className="h-[38px] w-[38px]" />{" "}
-            <img src={dots} alt="icon" className="h-[17px] w-[17px]" />
+            <img src={icon3} alt="icon" className="h-[44px] w-[44px]" />{" "}
+            <img src={dots} alt="icon" className="h-[20px] w-[20px]" />
           </div>
           <div>
-            <span className="text-[12px] text-[#495057] font-medium">
+            <span className="text-[14px] text-[#495057] font-medium">
               Carts recovered
             </span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-[28px] font-semibold">920</span>
-            <img src={badge} alt="badge" className="h-[18px] w-[50px]" />
+            <img src={badge} alt="badge" className="h-[21px] w-[53px]" />
           </div>
         </div>
       </div>

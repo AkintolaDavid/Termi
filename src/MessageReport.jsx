@@ -30,11 +30,11 @@ export default function MessageReport() {
   return (
     <div className=" ">
       <div className="flex  w-[100%] justify-between bg-white h-[55px] items-center rounded-tl-[12px] rounded-tr-[12px] px-4 border-[#EAECF0] border-[1px]">
-        <span className="text-[16px] font-bold">Message Reports</span>
-        <img src={dots} alt="icon" className="h-[17px] w-[17px]" />
+        <span className="text-[18px] font-bold">Message Reports</span>
+        <img src={dots} alt="icon" className="h-[20px] w-[20px]" />
       </div>
       <hr />
-      <div className="grid grid-cols-[4fr_2fr_1.5fr_2fr_1fr] px-4 h-[40px] items-center text-[12px] font-medium border-[#EAECF0] border-b-[1px] border-l-[1px] border-r-[1px]">
+      <div className="grid grid-cols-[4fr_2fr_1.5fr_2fr_1fr] px-4 h-[40px] items-center text-[14px] font-medium border-[#EAECF0] border-b-[1px] border-l-[1px] border-r-[1px]">
         <span>SMS</span>
         <span>Receiver</span>
         <span>Status</span>
@@ -47,7 +47,7 @@ export default function MessageReport() {
         {/* Outer container with fixed max height */}
         {data.map((item, i) => (
           <div key={i}>
-            <div className="grid grid-cols-[4fr_2fr_1.5fr_2fr_1fr] px-4 h-[55px] bg-white items-center text-[14px] font-medium border-[#EAECF0] border-b-[1px] border-l-[1px] border-r-[1px]">
+            <div className="grid grid-cols-[4fr_2fr_1.5fr_2fr_1fr] px-4 h-[55px] bg-white items-center text-[16px] font-medium border-[#EAECF0] border-b-[1px] border-l-[1px] border-r-[1px]">
               <span>{item.name}</span>
               <span>{item.phoneNumber}</span>
               <span>{item.status}</span>
