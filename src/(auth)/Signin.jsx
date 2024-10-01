@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Signin() {
   const navigate = useNavigate();
   const handleSubmit = () => {
-    navigate("/landing");
+    navigate("/dashboard");
   };
   return (
     <div className="flex h-[100vh]">
@@ -56,29 +56,11 @@ export default function Signin() {
           >
             Sign in
           </button>
-          <div className="flex">
-            <div>
-              <span className="h-2 bg-red-400 w-20"></span>
-            </div>
-            <span className="text-[#7A7A9D] text-[11px] mt-2  mb-2">
-              or do it via other accounts{" "}
+          <Link to="/">
+            <span className="text-[14px] text-[#586979] mt-6 underline underline-offset-1">
+              Do not have an account? Sign Up
             </span>
-            <div>
-              {" "}
-              <hr />
-            </div>
-          </div>
-          <div className="flex gap-4 mt-0">
-            <div className="h-10 w-12 bg-white rounded-lg flex items-center justify-center border-[1px] border-[#E2E6EB]">
-              <img src={pic2} alt="icon" className="h-5 w-5" />
-            </div>
-            <div className="h-10 w-12 bg-white rounded-lg flex items-center justify-center border-[1px] border-[#E2E6EB]">
-              <img src={pic3} alt="icon" className="h-5 w-5" />
-            </div>
-            <div className="h-10 w-14 bg-white rounded-lg flex items-center justify-center border-[1px] border-[#E2E6EB]">
-              <ImFacebook className="text-[#3B5999] text-[20px] h-5 w-5" />
-            </div>
-          </div>
+          </Link>
         </form>
       </div>
     </div>

@@ -6,9 +6,9 @@ import pic from "./assets/Capture.PNG";
 import { RiArrowDropDownLine } from "react-icons/ri";
 export default function Header() {
   return (
-    <div className="w-[100%] border-[#EAECF0] border-b-[1px] bg-white">
+    <div className="w-[100%]  border-[#EAECF0] border-b-[1px] bg-white">
       <div className="h-[90px] flex justify-between items-center px-5 ">
-        <span className="text-[20px]">Welcome Akintola David</span>
+        <span className="text-[20px] font-medium">Welcome, Akintola David</span>
 
         <div className="flex items-center">
           <div className="flex gap-3 mr-3">

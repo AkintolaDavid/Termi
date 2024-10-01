@@ -4,6 +4,7 @@ import icon2 from "./assets/cards/Icon-1.png";
 import icon3 from "./assets/cards/Icon-2.png";
 import badge from "./assets/cards/Badge.png";
 import dots from "./assets/cards/dots.png";
+import { Link } from "react-router-dom";
 export default function DashboardCards() {
   return (
     <div className="flex w-[100%] justify-between">
@@ -19,9 +20,9 @@ export default function DashboardCards() {
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-[28px] font-semibold">5,139</span>
+            <span className="text-[28px] font-semibold">₦5,139</span>
             <button className="flex rounded-[6px] items-center h-[32px] w-[100px] bg-[#4263EB] justify-center text-white  text-[14px]">
-              Fund wallet
+              <Link to="/wallet"> Fund wallet</Link>
             </button>
           </div>
         </div>

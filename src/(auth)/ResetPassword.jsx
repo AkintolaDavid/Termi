@@ -1,6 +1,7 @@
 import React from "react";
 import pic from "../assets/authimg/sign.png";
 import padlock from "../assets/authimg/padlock.png";
+import { Link } from "react-router-dom";
 export default function ResetPassword() {
   return (
     <div className="flex h-[100vh]">
@@ -31,9 +32,11 @@ export default function ResetPassword() {
             </div>
           </div>
 
-          <button className="bg-[#4C6FFF] mt-3 rounded-[6px] h-9 w-[100%] text-[12px] font-medium text-white">
-            Send me the link
-          </button>
+          <Link to="/verifyotpforgetpassword">
+            <button className="bg-[#4C6FFF] mt-3 rounded-[6px] h-9 w-[100%] text-[12px] font-medium text-white">
+              Send me the link
+            </button>
+          </Link>
         </form>
       </div>
     </div>
