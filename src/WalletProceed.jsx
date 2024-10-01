@@ -17,14 +17,19 @@ import { ModalBody } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import { ModalFooter } from "@chakra-ui/react";
 import thank from "./assets/cards/thank.png";
+import { useNavigate } from "react-router-dom";
 export default function WalletProceed() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const OverlayOne = () => <ModalOverlay bg="#C2C2C3" />;
   const [overlay, setOverlay] = React.useState(<OverlayOne />);
-
+  const navigate = useNavigate();
   const handleProceed = () => {
     setOverlay(<OverlayOne />);
     onOpen();
+  };
+  const modalhandleproceed = () => {
+    onClose();
+    navigate("/wallet");
   };
   return (
     <>
@@ -40,17 +45,13 @@ export default function WalletProceed() {
                 <span className="text-[24px] font-semibold">
                   Wallet Funding Successful!
                 </span>
-                <Link to="/walletproceed">
-                  <Button
-                    w="430px"
-                    h="45px"
-                    bg="#4263EB" // Background color set to red
-                    color="white"
-                    _hover="#4263EB" // Text color set to green
-                  >
-                    Proceed
-                  </Button>
-                </Link>
+
+                <button
+                  onClick={modalhandleproceed}
+                  className="w-[430px] h-[45px] rounded-[8px] bg-[#4263EB] text-white hover:bg-[#4263EB]"
+                >
+                  Proceed
+                </button>
               </div>
             </ModalBody>
             <ModalFooter></ModalFooter>
