@@ -41,7 +41,7 @@ export default function DashboardCards() {
           </div>
           <div className="flex justify-between  items-center">
             <span className="text-[28px] font-semibold">5,691</span>
-            <img src={badge} alt="badge" className="h-[21px] w-53px]" />
+            <img src={badge} alt="badge" className="h-[21px] w-[63px]" />
           </div>
         </div>
       </div>
@@ -56,9 +56,10 @@ export default function DashboardCards() {
               Carts recovered
             </span>
           </div>
+
           <div className="flex justify-between items-center">
             <span className="text-[28px] font-semibold">920</span>
-            <img src={badge} alt="badge" className="h-[21px] w-[53px]" />
+            <img src={badge} alt="badge" className="h-[21px] w-[63px]" />
           </div>
         </div>
       </div>
