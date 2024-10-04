@@ -1,82 +1,57 @@
-import React, { useState } from "react";
-import { Box, Button, Input, Text, VStack } from "@chakra-ui/react";
+import React from "react";
 import { Link } from "react-router-dom";
+import pic from "../assets/authimg/sign.png";
 
+import { useToast } from "../ToastContext";
 export default function Newpassword() {
-  const [otp, setOtp] = useState(["", "", "", ""]);
-
-  const handleSubmit = () => {};
+  const addToast = useToast();
+  const handleSubmit = () => {
+    addToast("Password changed successfully!", "success");
+  };
 
   return (
-    <div className="flex h-[100vh] items-center justify-center">
-      <VStack
-        w="650px"
-        h="450px"
-        borderRadius="12px"
-        spacing={10}
-        // justify="center"
-        align="center"
-        bg="gray.200"
-      >
-        {/* Header with blurred background */}
-        <Box
-          w="100%"
-          bg="rgba(255, 255, 255, 0.1)"
-          style={{ backdropFilter: "blur(10px)" }} // Blurred background
-          textAlign="center"
-          display="flex"
-          justifyContent="center"
-        >
-          <Text
-            backgroundColor="#4C6FFF"
-            fontSize="2xl"
-            fontWeight="bold"
-            color="white"
-            width="100%"
-            height="70px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            borderTopRadius="12px"
-          >
-            CHANGE PASSWORD
-          </Text>
-        </Box>
+    <div className="flex h-screen">
+      <div className="w-1/2 h-full flex items-center justify-center bg-[#F7FAFC]">
+        <img src={pic} alt="pic" className="w-4/5 h-full" />
+      </div>
 
-        {/* OTP Input boxes */}
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          mt="20px"
-          gap={6}
-          width="100%"
-        >
-          <div className="flex flex-col w-[60%] gap-2">
-            <label>New password</label>
-            <input className=" h-[35px] rounded-[8px]" />
+      <div className="flex  flex-col gap-2 h-screen w-1/2 items-center justify-center">
+        <div className="w-[65%] h-[350px] bg-[#f1f6fa] rounded-lg shadow-lg flex flex-col items-center">
+          {/* Header with blurred background */}
+          <div className="w-full  text-center rounded-t-lg">
+            <h2 className="bg-[#4C6FFF] rounded-t-lg text-white text-xl font-bold h-16 flex items-center justify-center">
+              CHANGE PASSWORD
+            </h2>
           </div>
-          <div className="flex flex-col w-[60%] gap-2">
-            <label>Confirm new password</label>
-            <input className=" h-[35px] rounded-[8px]" />
-          </div>
-        </Box>
 
-        {/* Submit Button */}
-        <Link to="/signin">
-          <Button
-            w="150px"
-            h="50px"
-            bg="#4C6FFF"
-            color="white"
-            _hover={{ bg: "#2B4AD1" }}
-            onClick={handleSubmit}
-          >
-            Submit
-          </Button>
+          {/* OTP Input fields */}
+          <div className="flex flex-col gap-3 mt-6 w-full items-center">
+            <div className="flex flex-col w-[60%] gap-2">
+              <label>New password</label>
+              <input className=" h-[35px] rounded-[8px]" />
+            </div>
+            <div className="flex flex-col w-[60%] gap-2">
+              <label>Confirm new password</label>
+              <input className=" h-[35px] rounded-[8px]" />
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <Link to="/signin">
+            <button
+              className="mt-8 w-32 h-10 bg-[#4C6FFF] text-white rounded-md hover:bg-[#2B4AD1] transition duration-200"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+          </Link>
+        </div>
+        <Link to="/signin" className="mt-3">
+          <span className="text-[14px] text-[#586979] underline underline-offset-1">
+            Already have an account? Login
+          </span>
         </Link>
-      </VStack>
+      </div>
     </div>
   );
 }

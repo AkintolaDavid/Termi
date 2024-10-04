@@ -13,10 +13,12 @@ import close from "./assets/cards/Group 7.png";
 export default function Sidebar() {
   return (
     <div className="w-[25%] border-[1px] border-r-[#EAECF0]">
-      <div className="h-full flex flex-col justify-between pt-5 pb-8 pl-[5%] pr-[5%]">
+      <div className="h-[90px] flex items-center pl-[5%]">
+        <img src={logo} alt="logo" className="h-[50px] object-contain" />
+      </div>
+      <div className="flex flex-col h-[calc(100vh-91px)] justify-between pb-6 pl-[5%] pr-[5%]">
         <div className="flex flex-col">
-          <img src={logo} alt="logo" className="h-10 object-contain" />
-          <div className="flex flex-col mt-3 gap-1.5">
+          <div className="flex flex-col gap-2">
             <NavLink
               to="/dashboard"
               className={({ isActive }) =>
@@ -136,30 +138,10 @@ export default function Sidebar() {
               />
               Developer
             </NavLink>
-
-            <NavLink
-              to="/settings"
-              className={({ isActive }) =>
-                `w-full h-[40px] rounded-[6px] flex items-center text-[15px] font-semibold gap-3 ${
-                  isActive
-                    ? "bg-[#4263EB] text-white"
-                    : "text-black hover:bg-[#4263EB] hover:text-white"
-                }`
-              }
-            >
-              <IoSettingsSharp
-                className={({ isActive }) =>
-                  ` ml-3 text-[23px] ${
-                    isActive ? " text-white" : "text-[#868E96]"
-                  }`
-                }
-              />
-              Settings
-            </NavLink>
           </div>
         </div>
-        <div className="flex flex-col gap-1 ">
-          <div className="bg-[#f8fafc] h-[auto] pb-5 w-[95%] rounded-[9px] ">
+        <div className="flex flex-col gap-2 ">
+          <div className="bg-[#f8fafc] h-[auto] pb-5 w-[100%] rounded-[9px] ">
             <div className=" flex justify-between  px-[10%] pt-4">
               <span className="text-[15px] font-semibold ">Your plan</span>
               <span>
@@ -168,27 +150,27 @@ export default function Sidebar() {
             </div>
             <div className=" flex flex-col px-[10%] pt-5 gap-[5px]  ">
               <div className="flex justify-between ">
-                <span className="text-[13px] text-[#495057]">Emails sent </span>
-                <span className="text-[13px] text-[#495057]">50 of 100</span>
-              </div>
-              <div className="w-full bg-gray-300 rounded-lg">
-                <div className="bg-blue-600 h-1 rounded-lg w-[50%]"></div>
-              </div>
-              <div className="flex justify-between  mt-[8px]">
-                <span className="text-[13px] text-[#495057]">SMS sent</span>
-                <span className="text-[13px] text-[#495057]">60 of 80</span>
-              </div>
-              <div className="w-full bg-gray-300 rounded-lg">
-                <div className="bg-blue-600 h-1 rounded-lg w-[70%]"></div>
-              </div>
-              <div className="flex justify-between  mt-[8px]">
-                <span className="text-[13px] text-[#495057]">
-                  Daily requests
+                <span className="text-[13px] font-medium text-[#495057]">
+                  Units left{" "}
                 </span>
-                <span className="text-[13px] text-[#495057]">10 of 50</span>
+                <span className="text-[13px] font-medium text-[#495057]">
+                  100
+                </span>
               </div>
               <div className="w-full bg-gray-300 rounded-lg">
-                <div className="bg-blue-600 h-1 rounded-lg w-[20%]"></div>
+                {/* <div className="bg-blue-600 h-1 rounded-lg w-[50%]"></div> */}
+              </div>
+
+              <div className="flex justify-between  mt-[8px]">
+                <span className="text-[13px] font-medium text-[#495057]">
+                  Total requests
+                </span>
+                <span className="text-[13px] font-medium text-[#495057]">
+                  50
+                </span>
+              </div>
+              <div className="w-full bg-gray-300 rounded-lg">
+                {/* <div className="bg-blue-600 h-1 rounded-lg w-[20%]"></div> */}
               </div>
             </div>
           </div>

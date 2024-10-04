@@ -10,8 +10,8 @@ export default function ResetPassword() {
         <img src={pic} alt="pic" className="w-[80%] h-[100%]" />
       </div>
 
-      <div className="w-[50%] flex justify-center items-center">
-        <form className="w-[60%] h-[84%] flex flex-col   justify-center   gap-3">
+      <div className="w-[50%] flex flex-col justify-center items-center gap-2">
+        <form className="w-[60%]  h-auto flex flex-col   justify-center   gap-3">
           <div>
             <img src={padlock} alt="padlock" className="h-20" />
           </div>
@@ -38,6 +38,11 @@ export default function ResetPassword() {
             </button>
           </Link>
         </form>
+        <Link to="/signin" className="mt-3">
+          <span className="text-[14px] text-[#586979] underline underline-offset-1">
+            Already have an account? Login
+          </span>
+        </Link>
       </div>
     </div>
   );

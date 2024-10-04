@@ -6,7 +6,6 @@ import copy from "./assets/cards/copy.png";
 import { useDisclosure } from "@chakra-ui/react";
 import {
   Modal,
-  ModalHeader,
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
@@ -15,10 +14,12 @@ import {
   ModalFooter,
   Button,
 } from "@chakra-ui/react";
+import { useToast } from "./ToastContext";
 
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Wallet() {
+  const addToast = useToast();
   const bank = "Providus Bank";
   const accountNumber = "1234567890"; // Example account number
   const accountName = "Abiola Ogunjobi"; // Example account name
@@ -27,25 +28,26 @@ export default function Wallet() {
   const [overlay, setOverlay] = useState(<OverlayOne />);
 
   const [approved, setapproved] = useState(false);
-
-  // New state to track which modal is open
   const [modalType, setModalType] = useState("");
   const navigate = useNavigate();
+
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text).then(() => {
       alert(`Copied to clipboard: ${text}`);
     });
   };
+
   const handleBVN = () => {
     setapproved(true);
     onClose(); // Close the modal
+    addToast("Virtual acoount created successfully!", "success");
     navigate("/wallet"); // Navigate to wallet
   };
 
   return (
     <>
       <Header />
-      <div className="w-full h-[calc(100vh-94px)] flex flex-col items-center  bg-[#f8fafc]">
+      <div className="w-full h-[calc(100vh-94px)] flex flex-col items-center bg-[#f8fafc]">
         {/* Modal */}
         <Modal isCentered isOpen={isOpen} onClose={onClose}>
           {overlay}
@@ -135,7 +137,6 @@ export default function Wallet() {
                         placeholder="Enter amount"
                       />
                     </div>
-                    {/* <Link to="/walletproceed"> */}
                     <Button
                       w="400px"
                       h="45px"
@@ -147,7 +148,6 @@ export default function Wallet() {
                     >
                       Verify
                     </Button>
-                    {/* </Link> */}
                   </div>
                 ) : null}
               </div>
@@ -170,7 +170,7 @@ export default function Wallet() {
                   setModalType("fundWallet"); // Set modal type
                   onOpen();
                 }}
-                className="font-medium text-white text-[16px] rounded-[6px] bg-[#007AFF] h-[30px] w-[120px]"
+                className="font-medium text-white text-[16px] rounded-[6px] bg-[#4263EB] h-[30px] w-[120px]"
               >
                 Fund wallet
               </button>
@@ -226,11 +226,11 @@ export default function Wallet() {
               </div>
             </div>
           ) : (
-            <div className="mr-20 flex flex-col items-center gap-2">
+            <div className="mr-20 flex flex-col items-center justify-center gap-2 mb-3">
               <span className="text-[20px] font-semibold">
                 Virtual Account Details
               </span>
-              <span className="text-[#828282] text-[12px] leading-5  w-[250px] text-center">
+              <span className="text-[#828282] text-[12px] leading-4 w-[250px] text-center">
                 Please complete your onboarding process to generate your virtual
                 account
               </span>
@@ -240,15 +240,18 @@ export default function Wallet() {
                   setModalType("createAccount"); // Set modal type
                   onOpen();
                 }}
-                className="h-[32px] w-[120px] rounded-[8px] bg-[#4263EB] text-[16px] text-white"
+                className="font-medium text-white text-[16px] rounded-[6px] bg-[#4263EB] h-[30px] w-[150px]"
               >
-                Get Started
+                Create Account
               </button>
             </div>
           )}
         </div>
 
-        <div className="w-[95%]  flex flex-col  ">
+        <div className="w-[95%] flex flex-col">
+          <span className="text-[20px] font-semibold pt-10 pb-4">
+            Recent Transactions
+          </span>
           <RecentTransactions />
         </div>
       </div>

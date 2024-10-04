@@ -1,5 +1,8 @@
-* {
-  font-family: "Inter", sans-serif;
+body {
+  font-family: "Montserrat", sans-serif; /* Apply Montserrat font */
+  margin: 0; /* Optional: reset default margin */
+  padding: 0; /* Optional: reset default padding */
+  box-sizing: border-box; /* Optional: include box-sizing */
 }
 .App {
   text-align: center;

@@ -1,12 +1,13 @@
 import React from "react";
 import pic from "../assets/authimg/sign.png";
-import { ImFacebook } from "react-icons/im";
-import pic2 from "../assets/authimg/goggle.png";
-import pic3 from "../assets/authimg/apple.png";
 import { Link, useNavigate } from "react-router-dom";
+
+import { useToast } from "../ToastContext";
 export default function Signup() {
+  const addToast = useToast(); // Get addToast function from context
   const navigate = useNavigate();
   const handleSubmit = () => {
+    addToast(" User registered successfully!", "success");
     navigate("/signin");
   };
   return (
@@ -17,48 +18,48 @@ export default function Signup() {
       </div>
 
       <div className="w-[50%] flex justify-center items-center">
-        <form className="w-[470px] bg-[#F7FAFC] h-[84%] flex flex-col items-center justify-center gap-2 rounded-[12px] border-[1px] border-[#EFF0F2] p-2">
+        <form className="w-[65%] bg-[#F7FAFC] h-[84%] flex flex-col items-center justify-center gap-2 rounded-[12px] border-[1px] border-[#EFF0F2] p-2">
           <span className="text-[22px] font-semibold">Create your account</span>
           <span className="text-[14px] font-medium mb-2">
             It's free and easy
           </span>
           <div className="flex flex-col w-full items-center gap-2">
             <div className="flex justify-between w-[80%] gap-1">
-              <div className="flex flex-col ">
+              <div className="flex flex-col w-full">
                 <label className="text-[13px] font-medium text-[#425466]">
                   Your firstname
                 </label>
                 <input
-                  className="h-8 text-[#7E868E] w-[180px] pl-3 rounded-[6px] text-[12px] border-[1px] border-[#E4E6EA]"
+                  className="h-8 text-[#7E868E]  pl-3 rounded-[6px] text-[12px] border-[1px] border-[#E4E6EA]"
                   placeholder="Enter your firstname"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col w-full">
                 <label className="text-[13px] font-medium text-[#425466]">
                   Your lastname
                 </label>
                 <input
-                  className="h-8 text-[#7E868E] w-[180px] pl-3 rounded-[6px] text-[12px] border-[1px] border-[#E4E6EA]"
+                  className="h-8 text-[#7E868E] pl-3 rounded-[6px] text-[12px] border-[1px] border-[#E4E6EA]"
                   placeholder="Enter your lastname"
                 />
               </div>
             </div>
             <div className="flex justify-between w-[80%] gap-1">
-              <div className="flex flex-col ">
+              <div className="flex flex-col w-full">
                 <label className="text-[13px] font-medium text-[#425466]">
                   Your phone number
                 </label>
                 <input
-                  className="h-8 text-[#7E868E] w-[180px] pl-3 rounded-[6px] text-[12px] border-[1px] border-[#E4E6EA]"
+                  className="h-8 text-[#7E868E] pl-3 rounded-[6px] text-[12px] border-[1px] border-[#E4E6EA]"
                   placeholder="Enter phone number"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col w-full">
                 <label className="text-[13px] font-medium text-[#425466]">
                   Your Email
                 </label>
                 <input
-                  className="h-8 text-[#7E868E] w-[180px] pl-3 rounded-[6px] text-[12px] border-[1px] border-[#E4E6EA]"
+                  className="h-8 text-[#7E868E] pl-3 rounded-[6px] text-[12px] border-[1px] border-[#E4E6EA]"
                   placeholder="Enter Your Email"
                 />
               </div>
@@ -100,8 +101,8 @@ export default function Signup() {
           >
             Register
           </button>
-          <Link to="/signin">
-            <span className="text-[14px] text-[#586979] mt-6 underline underline-offset-1">
+          <Link to="/signin" className="mt-3">
+            <span className="text-[14px] text-[#586979] underline underline-offset-1">
               Already have an account? Login
             </span>
           </Link>

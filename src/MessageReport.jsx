@@ -33,7 +33,7 @@ const MessageReport = () => {
     <div className="flex flex-col w-[100%] border-[1px]  border-[#EAECF0] rounded-[5px]">
       <div className="h-[62px] rounded-t-[5px] flex justify-between items-center pl-6 text-[18px] font-semibold bg-white">
         Message Reports
-        <img src={dots} alt="icon" className="h-[20px] w-[20px] mr-6" />
+        {/* <img src={dots} alt="icon" className="h-[20px] w-[20px] mr-6" /> */}
       </div>
       <table className="w-[100%] border-collapse border-t border-b border-[#EAECF0] ">
         <thead>
@@ -47,10 +47,10 @@ const MessageReport = () => {
             <th className="text-left text-[#495057] text-[12px] font-normal border-t border-b border-[#EAECF0] p-2 pl-6 w-[17%]">
               Amount
             </th>
-            <th className="text-left text-[#495057] text-[12px] font-normal border-t border-b border-[#EAECF0] p-2 pl-6 w-[17%]">
+            <th className="text-left text-[#495057] text-[12px] font-normal border-t border-b border-[#EAECF0] p-2 pl-6 w-[4%]">
               Time
             </th>
-            <th className="text-left text-[#495057] text-[12px] font-normal border-t border-b border-[#EAECF0] p-2 pl-6 w-[17%]">
+            <th className="text-left text-[#495057] text-[12px] font-normal border-t border-b border-[#EAECF0] p-2 pl-6 w-[11%]">
               Time
             </th>
           </tr>

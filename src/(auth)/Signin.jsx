@@ -1,24 +1,27 @@
 import React from "react";
 import pic from "../assets/authimg/sign.png";
-import { ImFacebook } from "react-icons/im";
-import pic2 from "../assets/authimg/goggle.png";
-import pic3 from "../assets/authimg/apple.png";
 import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "../ToastContext";
 export default function Signin() {
+  const addToast = useToast(); // Get addToast function from context
+
   const navigate = useNavigate();
   const handleSubmit = () => {
+    addToast("Sign in successful!", "success");
+
     navigate("/dashboard");
   };
   return (
-    <div className="flex h-[100vh]">
+    <div className="flex h-[100vh] font-montserrat">
       {/* <div className="w-[50%] bg-red-300"></div> */}
       <div className="w-[50%] h-full flex items-center justify-center bg-[#F7FAFC]">
         <img src={pic} alt="pic" className="w-[80%] h-[100%]" />
       </div>
 
       <div className="w-[50%] flex justify-center items-center">
-        <form className="w-[60%] bg-[#F7FAFC] h-[84%] flex flex-col items-center justify-center rounded-[12px] border-[1px] border-[#EFF0F2] p-2 gap-4">
+        <form className="w-[65%] bg-[#F7FAFC] h-[84%] flex flex-col items-center justify-center rounded-[12px] border-[1px] border-[#EFF0F2] p-2 gap-4">
           <div className="text-3xl">👋</div>
+
           <span className="text-[25px] font-semibold">Welcome back!</span>
           <span className="text-[13px] font-medium mb-3">
             {" "}
@@ -56,8 +59,8 @@ export default function Signin() {
           >
             Sign in
           </button>
-          <Link to="/">
-            <span className="text-[14px] text-[#586979] mt-6 underline underline-offset-1">
+          <Link to="/" className="mt-3">
+            <span className="text-[14px] text-[#586979]   underline underline-offset-1">
               Do not have an account? Sign Up
             </span>
           </Link>

@@ -1,99 +1,72 @@
+// VerifyOtpForgotPassword.js
 import React, { useState } from "react";
-import { Box, Button, Input, Text, VStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import pic from "../assets/authimg/sign.png";
+import { useToast } from "../ToastContext"; // Import the useToast hook
 
-export default function VerifyOtp() {
+export default function VerifyOtpForgotPassword() {
   const [otp, setOtp] = useState(["", "", "", ""]);
+  const addToast = useToast(); // Get addToast function from context
 
-  // Handle OTP input
   const handleChange = (e, index) => {
     const { value } = e.target;
     const newOtp = [...otp];
-    newOtp[index] = value.slice(0, 1); // Only allow one digit per box
+    newOtp[index] = value.slice(0, 1);
     setOtp(newOtp);
-
-    // Automatically move to the next input box
     if (value && index < 3) {
       document.getElementById(`otp-${index + 1}`).focus();
     }
   };
 
-  // Handle OTP submission
   const handleSubmit = () => {
-    // alert(`Entered OTP is: ${otp.join("")}`);
+    // Here you would check if the OTP is correct
+    // For demonstration, we show a success toast and navigate to the new password page
+    addToast("OTP verified successfully!", "success"); // Show success toast
   };
 
   return (
-    <div className="flex h-[100vh] items-center justify-center">
-      <VStack
-        w="650px"
-        h="450px"
-        borderRadius="12px"
-        spacing={10}
-        // justify="center"
-        align="center"
-        bg="gray.200"
-      >
-        {/* Header with blurred background */}
-        <Box
-          w="100%"
-          bg="rgba(255, 255, 255, 0.1)"
-          style={{ backdropFilter: "blur(10px)" }} // Blurred background
-          textAlign="center"
-          display="flex"
-          justifyContent="center"
-        >
-          <Text
-            backgroundColor="#4C6FFF"
-            fontSize="2xl"
-            fontWeight="bold"
-            color="white"
-            width="100%"
-            height="70px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            borderTopRadius="12px"
-          >
-            Verify OTP
-          </Text>
-        </Box>
+    <div className="flex h-screen">
+      <div className="w-1/2 h-full flex items-center justify-center bg-[#F7FAFC]">
+        <img src={pic} alt="pic" className="w-4/5 h-full" />
+      </div>
+      <div className="flex flex-col gap-2 h-screen w-1/2 items-center justify-center">
+        <div className="w-[65%] h-[300px] bg-[#f1f6fa] rounded-lg shadow-lg flex flex-col items-center">
+          <div className="w-full text-center rounded-t-lg">
+            <h2 className="bg-[#4C6FFF] rounded-t-lg text-white text-xl font-bold h-16 flex items-center justify-center">
+              Verify OTP
+            </h2>
+          </div>
 
-        {/* OTP Input boxes */}
-        <Box display="flex" justifyContent="center" mt="50px" gap={4}>
-          {otp.map((value, index) => (
-            <Input
-              key={index}
-              id={`otp-${index}`}
-              type="text"
-              value={value}
-              onChange={(e) => handleChange(e, index)}
-              maxLength="1"
-              textAlign="center"
-              fontSize="2xl"
-              w="50px"
-              h="60px"
-              bg="white"
-              border="2px solid #E2E8F0"
-              borderRadius="8px"
-            />
-          ))}
-        </Box>
+          <div className="flex gap-4 mt-16">
+            {otp.map((value, index) => (
+              <input
+                key={index}
+                id={`otp-${index}`}
+                type="text"
+                value={value}
+                onChange={(e) => handleChange(e, index)}
+                maxLength="1"
+                className="w-10 h-10 text-center text-2xl border-2 border-gray-300 rounded-md"
+              />
+            ))}
+          </div>
 
-        {/* Submit Button */}
-        <Link to="/newpassword">
-          <Button
-            w="150px"
-            h="50px"
-            bg="#4C6FFF"
-            color="white"
-            _hover={{ bg: "#2B4AD1" }}
-            onClick={handleSubmit}
-          >
-            Submit
-          </Button>
+          {/* Submit Button */}
+          <Link to="/newpassword">
+            <button
+              className="mt-10 w-32 h-10 bg-[#4C6FFF] text-white rounded-md hover:bg-[#2B4AD1] transition duration-200"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+          </Link>
+        </div>
+        <Link to="/signin" className="mt-3">
+          <span className="text-[14px] text-[#586979] underline underline-offset-1">
+            Already have an account? Login
+          </span>
         </Link>
-      </VStack>
+      </div>
     </div>
   );
 }

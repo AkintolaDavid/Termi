@@ -1,7 +1,10 @@
 // Profile.js
 import React, { useState } from "react";
 import Header from "./Header";
+
+import { useToast } from "./ToastContext";
 export default function Profile() {
+  const addToast = useToast();
   const [profile, setprofile] = useState(true);
   const [security, setsecurity] = useState(false);
 
@@ -16,6 +19,12 @@ export default function Profile() {
     // Ensure at least one section is shown by toggling blood pressure if necessary
     setprofile(false);
   };
+  const handleupdatesecurity = () => {
+    addToast("  Security updated successfully!", "success");
+  };
+  const handleupdateprofile = () => {
+    addToast("  Profile updated successfully!", "success");
+  };
   return (
     <>
       <Header />
@@ -29,10 +38,10 @@ export default function Profile() {
               Update your account information
             </span>
           </div>
-          <div className="h-[35px] flex w-[220px] rounded-md border-[1px]">
+          <div className="h-[35px] flex w-[250px] rounded-md border-[1px]">
             <button
               onClick={handleToggleprofile}
-              className={`flex items-center justify-center px-4 rounded-[4px] py-2 border-[#EEEEEE] w-[110px] ${
+              className={`flex items-center justify-center px-4 rounded-[4px] py-2 border-[#EEEEEE] w-[50%] ${
                 profile ? "bg-[#3B5BDB] text-white" : "bg-white text-[#9B9B9B]"
               }`}
             >
@@ -40,7 +49,7 @@ export default function Profile() {
             </button>
             <button
               onClick={handleTogglesecurity}
-              className={`flex items-center justify-center px-4 rounded-[4px]  py-2  border-[#EEEEEE] w-[110px] ${
+              className={`flex items-center justify-center px-4 rounded-[4px]  py-2  border-[#EEEEEE] w-[50%] ${
                 security ? "bg-[#3B5BDB] text-white" : "bg-white text-[#9B9B9B]"
               }`}
             >
@@ -139,7 +148,10 @@ export default function Profile() {
                     />
                   </div>
                 </div>
-                <button className="bg-[#4263EB] text-white w-[700px] text-[16px] mt-6 h-[37px] rounded-[10px]">
+                <button
+                  onClick={handleupdateprofile}
+                  className="bg-[#4263EB] text-white w-[700px] text-[16px] mt-6 h-[37px] rounded-[10px]"
+                >
                   Update
                 </button>
               </form>
@@ -189,7 +201,10 @@ export default function Profile() {
                     />
                   </div>
                 </div>
-                <button className="bg-[#4263EB] text-white w-[700px] text-[16px] mt-8 h-[37px] rounded-[10px]">
+                <button
+                  onClick={handleupdatesecurity}
+                  className="bg-[#4263EB] text-white w-[700px] text-[16px] mt-8 h-[37px] rounded-[10px]"
+                >
                   Update
                 </button>
               </form>

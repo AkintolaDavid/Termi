@@ -1,20 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "./Header";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import check from "./assets/cards/check.png";
-import uncheck from "./assets/cards/uncheck.png";
 import cardimg from "./assets/cards/cardimg.png";
 import { Link } from "react-router-dom";
 import { useDisclosure } from "@chakra-ui/react";
 import { Modal } from "@chakra-ui/react";
-import { ModalHeader } from "@chakra-ui/react";
 import { ModalOverlay } from "@chakra-ui/react";
 import { ModalContent } from "@chakra-ui/react";
 import { ModalCloseButton } from "@chakra-ui/react";
-
-import { Button } from "@chakra-ui/react";
 import { ModalBody } from "@chakra-ui/react";
-import { Text } from "@chakra-ui/react";
 import { ModalFooter } from "@chakra-ui/react";
 import thank from "./assets/cards/thank.png";
 import { useNavigate } from "react-router-dom";
@@ -63,9 +58,9 @@ export default function WalletProceed() {
             <FaArrowLeftLong className="text-xl" /> Back
           </Link>
         </div>
-        <div className="flex justify-between">
-          <div>
-            <div className="flex items-center bg-white w-[700px] h-[85px] gap-5 border-b-[1px] border-[#E0E0E0] rounded-t-[8px]">
+        <div className="flex  w-full">
+          <div className=" w-[67%]">
+            <div className="flex items-center w-[95%] bg-white h-[85px] gap-5 border-b-[1px] border-[#E0E0E0] rounded-t-[8px]">
               <img src={check} alt="check" className="h-[18px] w-[18px] ml-5" />
               <img src={cardimg} alt="check" className="h-[40px] w-[40px]" />
               <div className="flex flex-col gap-1">
@@ -77,7 +72,7 @@ export default function WalletProceed() {
                 </span>
               </div>
             </div>
-            <div className="flex items-center bg-white w-[700px] h-[85px] gap-5 border-b-[1px] border-[#E0E0E0]">
+            <div className="flex items-center bg-white w-[95%] h-[85px] gap-5 border-b-[1px] border-[#E0E0E0]">
               <img src={check} alt="check" className="h-[18px] w-[18px] ml-5" />
               <img src={cardimg} alt="check" className="h-[40px] w-[40px]" />
               <div className="flex flex-col gap-1">
@@ -89,7 +84,7 @@ export default function WalletProceed() {
                 </span>
               </div>
             </div>
-            <div className="flex items-center bg-white w-[700px] h-[85px] gap-5 rounded-b-[8px]">
+            <div className="flex items-center bg-white w-[95%] h-[85px] gap-5 rounded-b-[8px]">
               <img src={check} alt="check" className="h-[18px] w-[18px] ml-5" />
               <img src={cardimg} alt="check" className="h-[40px] w-[40px]" />
               <div className="flex flex-col gap-1">
@@ -103,7 +98,7 @@ export default function WalletProceed() {
             </div>
           </div>
 
-          <div className="mr-[2.5%]">
+          <div className="mr-[2.5%] w-[20%]">
             <div className="flex flex-col items-center justify-center bg-white w-[370px] h-[240px] text-[20px] font-medium gap-4 rounded-[8px]">
               <div className="flex justify-between w-[70%]">
                 <span className="text-[#5D5F5F]">Subtotal</span>
