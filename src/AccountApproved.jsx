@@ -27,7 +27,7 @@ export default function AccountApproved() {
                   onClick={() => {
                     setApproved(false);
                   }}
-                  className=" flex rounded-[6px] items-center h-[35px] w-[125px] bg-[#4263EB] justify-center text-white gap-[14px] text-[15px] mt-3"
+                  className=" flex rounded-[6px] items-center h-[35px] w-[125px] bg-[#4263EB] justify-center text-white gap-[14px] text-[15px] mt-3 px-2"
                 >
                   Get started <FaArrowRight className="text-white" />
                 </button>
