@@ -43,14 +43,7 @@ const MessageReport = () => {
       date: "2023-10-02",
       pages: "142",
     },
-    {
-      name: "Jane Smith",
-      phoneNumber: "987-654-3210",
-      status: "pending",
-      time: "2:00 PM",
-      date: "2023-10-02",
-      pages: "142",
-    },
+
     {
       name: "John Doe",
       phoneNumber: "123-456-7890",
