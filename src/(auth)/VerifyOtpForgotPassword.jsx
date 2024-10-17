@@ -129,37 +129,24 @@ export default function VerifyOtpForgotPassword() {
         <img src={pic} alt="pic" className="w-4/5 h-full" />
       </div>
       <div className="flex flex-col gap-2 h-screen w-1/2 items-center justify-center">
-        <div className="w-[65%] h-[300px] bg-[#f1f6fa] rounded-lg shadow-lg flex flex-col items-center">
+        {/* <div className="w-[65%] h-[300px] bg-[#f1f6fa] rounded-lg shadow-lg flex flex-col items-center">
           <div className="w-full text-center rounded-t-lg">
             <h2 className="bg-[#4C6FFF] rounded-t-lg text-white text-xl font-bold h-16 flex items-center justify-center">
               Verify OTP
             </h2>
           </div>
 
-          <div className="flex gap-4 mt-16">
-            {joinotp.map((value, index) => (
-              <input
-                key={index}
-                ref={(el) => (inputRefs.current[index] = el)}
-                type="text"
-                value={value}
-                onChange={(e) => handleChange(e, index)}
-                onKeyDown={(e) => handleKeyDown(index, e)}
-                maxLength="1"
-                className="w-10 h-10 text-center text-2xl border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-              />
-            ))}
-          </div>
+        
 
-          {/* Submit Button */}
+        
           <button
             className="mt-10 w-32 h-10 bg-[#4C6FFF] text-white rounded-md hover:bg-[#2B4AD1] transition duration-200"
             onClick={handleSubmit}
           >
             Submit OTP
           </button>
-        </div>
-        <div className="w-[65%] h-[350px] bg-[#f1f6fa] rounded-lg shadow-lg flex flex-col items-center">
+        </div> */}
+        <div className="w-[65%] h-auto pb-10 bg-[#f1f6fa] rounded-lg shadow-lg flex flex-col items-center">
           {/* Header with blurred background */}
           <div className="w-full text-center rounded-t-lg">
             <h2 className="bg-[#4C6FFF] rounded-t-lg text-white text-xl font-bold h-16 flex items-center justify-center">
@@ -168,7 +155,24 @@ export default function VerifyOtpForgotPassword() {
           </div>
 
           {/* Password Input fields */}
-          <div className="flex flex-col gap-3 mt-6 w-full items-center">
+          <div className="flex flex-col gap-3 mt-0 w-full items-center">
+            <div className="flex flex-col w-[60%] ml-[20%] gap-2 mt-6">
+              <label> Enter Otp below</label>
+              <div className="flex gap-4 mt-2">
+                {joinotp.map((value, index) => (
+                  <input
+                    key={index}
+                    ref={(el) => (inputRefs.current[index] = el)}
+                    type="text"
+                    value={value}
+                    onChange={(e) => handleChange(e, index)}
+                    onKeyDown={(e) => handleKeyDown(index, e)}
+                    maxLength="1"
+                    className="w-10 h-10 text-center text-2xl border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                  />
+                ))}
+              </div>{" "}
+            </div>
             <div className="flex flex-col w-[60%] gap-2">
               <label>New password</label>
               <input
@@ -193,7 +197,7 @@ export default function VerifyOtpForgotPassword() {
 
           {/* Submit Button */}
           <button
-            className="mt-8 w-32 h-10 bg-[#4C6FFF] text-white rounded-md hover:bg-[#2B4AD1] transition duration-200"
+            className="mt-8 w-[60%] h-10 bg-[#4C6FFF] text-white rounded-md hover:bg-[#2B4AD1] transition duration-200"
             onClick={handleSubmit}
           >
             Submit Password
