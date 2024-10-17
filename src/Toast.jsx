@@ -1,6 +1,6 @@
 import React from "react";
 
-const Toast = ({ message, type, onClose }) => {
+const Toast = ({ message, title, type, onClose }) => {
   const toastStyles = {
     success: "bg-green-500",
     error: "bg-red-500",
@@ -10,10 +10,13 @@ const Toast = ({ message, type, onClose }) => {
 
   return (
     <div
-      className={`fixed top-5 right-5 py-6 px-8 rounded-md text-white text-lg shadow-lg transition-opacity duration-300 ${toastStyles[type]}`}
-      onClick={onClose}
+      className={`fixed top-5 right-5 mb-4 p-4 rounded shadow-lg ${toastStyles[type]} text-white`}
     >
-      {message}
+      {title && <h4 className="font-bold">{title}</h4>}
+      <p>{message}</p>
+      <button onClick={onClose} className="ml-2 text-white underline">
+        Close
+      </button>
     </div>
   );
 };

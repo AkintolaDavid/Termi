@@ -6,14 +6,56 @@ import { Avatar } from "@chakra-ui/react";
 import pic from "./assets/Capture.PNG";
 import { useNavigate } from "react-router-dom";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { useToast } from "./ToastContext";
+import { useToast } from "@chakra-ui/react";
+import axios from "axios";
 export default function Header() {
-  const addToast = useToast();
+  const toast = useToast();
   const navigate = useNavigate();
   const [showdropdown, setshowdropdown] = useState(false);
-  const handleLogout = () => {
-    addToast(" User Logged out successfully!", "success");
-    navigate("/signin");
+  const handleLogout = async () => {
+    const token = localStorage.getItem("token");
+    // localStorage.clear();
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/auth/logout`,
+        {}, // Empty request body (if needed)
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Add the token in the Authorization header
+          },
+        }
+      );
+
+      // Handle successful registration
+      if (response.status === 200) {
+        localStorage.removeItem("token");
+        toast({
+          title: "User Logout Successful.",
+          // description: "Check your mail for OTP sent",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "top-right", // Position the toast
+        });
+        navigate("/signin");
+      }
+    } catch (error) {
+      // Handle errors
+      console.error("Error during registration:", error);
+      const errorResponse = error.response?.data;
+
+      let errorMessage = "Registration failed"; // Default message
+      if (errorResponse) {
+        errorMessage = errorResponse.message; // Use general error message if available
+      }
+      toast({
+        title: errorMessage,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+    }
   };
   return (
     <div className="w-[100%]  border-[#EAECF0] border-b-[1px] bg-white">

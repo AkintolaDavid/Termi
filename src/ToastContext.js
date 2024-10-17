@@ -11,9 +11,9 @@ export const useToast = () => {
 export const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
 
-  const addToast = (message, type) => {
+  const addToast = (message, title, type) => {
     const id = Date.now();
-    setToasts((prev) => [...prev, { id, message, type }]);
+    setToasts((prev) => [...prev, { id, message, title, type }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((toast) => toast.id !== id));
     }, 3000);
@@ -26,8 +26,11 @@ export const ToastProvider = ({ children }) => {
         <Toast
           key={toast.id}
           message={toast.message}
+          title={toast.title}
           type={toast.type}
-          onClose={() => {}}
+          onClose={() =>
+            setToasts((prev) => prev.filter((t) => t.id !== toast.id))
+          }
         />
       ))}
     </ToastContext.Provider>

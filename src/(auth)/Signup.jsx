@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import pic from "../assets/authimg/sign.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useToast } from "../ToastContext";
+import { useToast } from "@chakra-ui/react"; // Import useToast from Chakra UI
 import axios from "axios"; // Import Axios
 
 export default function Signup() {
-  const addToast = useToast(); // Get addToast function from context
+  const toast = useToast(); // Get toast function from Chakra UI
   const navigate = useNavigate();
 
   // State for form fields
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+  const [first_name, setFirstname] = useState("");
+  const [last_name, setLastname] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -21,8 +21,8 @@ export default function Signup() {
 
     // Prepare data for registration
     const userData = {
-      firstname,
-      lastname,
+      first_name,
+      last_name,
       phone,
       email,
       companyName,
@@ -31,21 +31,44 @@ export default function Signup() {
 
     try {
       const response = await axios.post(
-        "https://termi-three.vercel.app/auth/register",
+        `${process.env.REACT_APP_BASE_URL}/auth/register`,
         userData // Axios automatically sets the Content-Type to application/json
       );
 
       // Handle successful registration
-      if (response.status === 200) {
-        addToast("User registered successfully!", "success");
-        navigate("/signin");
+      if (response.status === 201) {
+        localStorage.setItem("userEmail", email);
+        toast({
+          title: "User registered Successful.",
+          description: "Check your mail for OTP sent",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "top-right", // Position the toast
+        });
+        navigate("/verifyotpsignup");
       }
     } catch (error) {
       // Handle errors
       console.error("Error during registration:", error);
-      const errorMessage =
-        error.response?.data?.message || "Registration failed";
-      addToast(errorMessage, "error");
+      const errorResponse = error.response?.data;
+
+      let errorMessage = "Registration failed"; // Default message
+      if (errorResponse) {
+        // If specific error for email is present
+        if (errorResponse.errors && errorResponse.errors.email) {
+          errorMessage = errorResponse.errors.email[0]; // Access the email error message
+        } else if (errorResponse.message) {
+          errorMessage = errorResponse.message; // Use general error message if available
+        }
+      }
+      toast({
+        title: errorMessage,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
     }
   };
 
@@ -72,7 +95,7 @@ export default function Signup() {
                 </label>
                 <input
                   type="text"
-                  value={firstname}
+                  value={first_name}
                   onChange={(e) => setFirstname(e.target.value)}
                   className="h-8 text-[#7E868E] pl-3 rounded-[6px] text-[12px] border-[1px] border-[#E4E6EA]"
                   placeholder="Enter your firstname"
@@ -85,7 +108,7 @@ export default function Signup() {
                 </label>
                 <input
                   type="text"
-                  value={lastname}
+                  value={last_name}
                   onChange={(e) => setLastname(e.target.value)}
                   className="h-8 text-[#7E868E] pl-3 rounded-[6px] text-[12px] border-[1px] border-[#E4E6EA]"
                   placeholder="Enter your lastname"

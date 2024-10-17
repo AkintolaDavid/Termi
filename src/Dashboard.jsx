@@ -4,6 +4,7 @@ import AccountApproved from "./AccountApproved";
 import DashboardCards from "./DashboardCards";
 import MessageReport from "./MessageReport";
 export default function Dashboard() {
+  console.log(localStorage.getItem("token"));
   return (
     <>
       <Header />
