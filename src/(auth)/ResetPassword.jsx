@@ -23,7 +23,7 @@ export default function ResetPassword() {
         localStorage.setItem("userEmailpassword", email);
         toast({
           title: "password reset otp sent Successful.",
-          // description: "Check your mail for OTP sent",
+          // description: "Check your mail for OTP sentd",
           status: "success",
           duration: 5000,
           isClosable: true,
