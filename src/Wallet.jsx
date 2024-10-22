@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import RecentTransactions from "./RecentTransactions";
 import trans from "./assets/cards/trans.png";
@@ -15,8 +15,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useToast } from "./ToastContext";
-
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios for API calls
 
 export default function Wallet() {
   const addToast = useToast();
@@ -26,22 +26,62 @@ export default function Wallet() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const OverlayOne = () => <ModalOverlay bg="#C2C2C3" />;
   const [overlay, setOverlay] = useState(<OverlayOne />);
-
   const [approved, setapproved] = useState(false);
   const [modalType, setModalType] = useState("");
+  const [walletBalance, setWalletBalance] = useState(0); // State to hold wallet balance
+  const [fundAmount, setFundAmount] = useState(); // Amount to be funded by the user
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("token"); // Assuming token is stored in local storage
+
+  // Fetch wallet balance on component mount
+  // useEffect(() => {
+  //   const fetchWalletBalance = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/wallet/balance`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       );
+  //       if (response.data.status) {
+  //         setWalletBalance(response.data.data.balance);
+  //       } else {
+  //         console.error("Error fetching wallet balance");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching wallet balance", error);
+  //     }
+  //   };
+  //   fetchWalletBalance();
+  // }, [token]);
+
+  // Handle copy action for account details
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text).then(() => {
       alert(`Copied to clipboard: ${text}`);
     });
   };
 
+  // Handle creating a virtual account
   const handleBVN = () => {
     setapproved(true);
     onClose(); // Close the modal
-    addToast("Virtual acoount created successfully!", "success");
+    addToast("Virtual account created successfully!", "success");
     navigate("/wallet"); // Navigate to wallet
+  };
+
+  // Handle the fund wallet modal submission
+  const handleFundWallet = () => {
+    if (fundAmount <= 0) {
+      alert("Please enter a valid amount to fund your wallet.");
+      return;
+    }
+    // Add logic here to proceed with funding
+    // For example, call an API to fund the wallet
+    navigate("/walletproceed", { state: { amount: fundAmount } }); // Passing the amount to proceed
   };
 
   return (
@@ -75,20 +115,21 @@ export default function Wallet() {
                         type="number"
                         className="h-[38px] text-[#7E868E] pl-3 rounded-[6px] text-[13px]  border-[1px] border-[#E4E6EA] "
                         placeholder="Enter amount"
+                        value={fundAmount}
+                        onChange={(e) => setFundAmount(e.target.value)}
                       />
                     </div>
 
-                    <Link to="/walletproceed">
-                      <Button
-                        w="500px"
-                        h="45px"
-                        bg="#4263EB"
-                        color="white"
-                        _hover="#4263EB"
-                      >
-                        Proceed
-                      </Button>
-                    </Link>
+                    <Button
+                      onClick={handleFundWallet}
+                      w="500px"
+                      h="45px"
+                      bg="#4263EB"
+                      color="white"
+                      _hover={{ bg: "#4263EB" }}
+                    >
+                      Proceed
+                    </Button>
                   </>
                 ) : modalType === "createAccount" ? (
                   <div className="flex flex-col gap-6 items-center">
@@ -114,7 +155,7 @@ export default function Wallet() {
                       <input
                         type="number"
                         className="h-[38px] text-[#7E868E] pl-3 rounded-[12px] text-[14px]  border-[1px] border-[#E0E0E0] "
-                        placeholder="Enter amount"
+                        placeholder="Enter BVN"
                       />
                     </div>
                     <div className="flex flex-col w-[400px] gap-1">
@@ -134,7 +175,7 @@ export default function Wallet() {
                       <input
                         type="date"
                         className="h-[38px] pr-3 text-[#7E868E] pl-4 rounded-[12px] text-[14px]  border-[1px] border-[#E0E0E0] "
-                        placeholder="Enter amount"
+                        placeholder="Enter Date of Birth"
                       />
                     </div>
                     <Button
@@ -142,7 +183,7 @@ export default function Wallet() {
                       h="45px"
                       bg="#4263EB"
                       color="white"
-                      _hover="#4263EB"
+                      _hover={{ bg: "#4263EB" }}
                       rounded="10px"
                       onClick={handleBVN}
                     >
@@ -160,7 +201,9 @@ export default function Wallet() {
           <div className="flex gap-4">
             <img src={trans} alt="trans" className="h-[120px] w-[150px]" />
             <div className="flex flex-col gap-1">
-              <span className="text-[32px] font-semibold">₦0.00</span>
+              <span className="text-[32px] font-semibold">
+                ₦{walletBalance.toFixed(2)}
+              </span>
               <span className="text-[#828282] text-[14px]">
                 Total wallet balance
               </span>

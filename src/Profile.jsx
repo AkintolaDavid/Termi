@@ -21,9 +21,9 @@ export default function Profile() {
   });
 
   const [securityData, setSecurityData] = useState({
-    oldPassword: "",
-    newPassword: "",
-    repeatNewPassword: "",
+    // oldPassword: "",
+    password: "", // Changed from 'newPassword'
+    password_confirmation: "", // Changed from 'repeatNewPassword'
   });
 
   const handleInputChange = (e) => {
@@ -124,7 +124,9 @@ export default function Profile() {
 
   const handleUpdateSecurity = async (e) => {
     e.preventDefault();
-    if (securityData.newPassword !== securityData.repeatNewPassword) {
+
+    // Check if passwords match
+    if (securityData.password !== securityData.password_confirmation) {
       toast({
         title: "Passwords do not match.",
         status: "error",
@@ -134,9 +136,10 @@ export default function Profile() {
       });
       return;
     }
+
     try {
-      const response = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/user/security`,
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/user/change_password`,
         securityData,
         {
           headers: {
@@ -144,9 +147,17 @@ export default function Profile() {
           },
         }
       );
+      toast({
+        title: "Password changed successfully.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
       console.log(response.data);
     } catch (error) {
-      console.error(error);
+      console.error(error.response ? error.response.data : error.message);
+      // Handle specific error cases
     }
   };
 
@@ -339,8 +350,8 @@ export default function Profile() {
                 </label>
                 <input
                   type="password"
-                  name="newPassword"
-                  value={securityData.newPassword}
+                  name="password" // Updated field name
+                  value={securityData.password} // Updated value
                   onChange={handleSecurityChange}
                   required
                   className="h-[37px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
@@ -354,8 +365,8 @@ export default function Profile() {
                 </label>
                 <input
                   type="password"
-                  name="repeatNewPassword"
-                  value={securityData.repeatNewPassword}
+                  name="password_confirmation" // Updated field name
+                  value={securityData.password_confirmation} // Updated value
                   onChange={handleSecurityChange}
                   required
                   className="h-[37px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
