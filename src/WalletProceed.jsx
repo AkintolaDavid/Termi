@@ -35,7 +35,7 @@ export default function PaymentComponent() {
         paymentPayload,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: ` Bearer ${token}`,
           },
         }
       );
@@ -85,7 +85,7 @@ export default function PaymentComponent() {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/payment/flw/initialize`,
+        ` ${process.env.REACT_APP_BASE_URL}/payment/flw/initialize`,
         paymentPayload,
         {
           headers: {
