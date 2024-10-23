@@ -1,11 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import icon1 from "./assets/cards/Icon.png";
 import icon2 from "./assets/cards/Icon-1.png";
 import icon3 from "./assets/cards/Icon-2.png";
 import badge from "./assets/cards/Badge.png";
 import dots from "./assets/cards/dots.png";
 import { Link } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
+import axios from "axios";
 export default function DashboardCards() {
+  const toast = useToast(); // Chakra UI toast hook
+  const [walletBalance, setWalletBalance] = useState(0);
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const fetchWalletBalance = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/user/profile`,
+          {
+            headers: { Authorization: `Bearer ${token}` }, // Pass the token in the headers
+          }
+        );
+
+        setWalletBalance(response.data.data.wallet.balance); // Update wallet balance from response
+      } catch (error) {
+        console.error("Error fetching wallet balance:", error);
+        toast({
+          title: "Error fetching balance",
+          description: "Unable to retrieve wallet balance.",
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      }
+    };
+
+    fetchWalletBalance();
+  }, [token, toast]); // Add token and toast as dependencies
+
   return (
     <div className="flex w-[100%] justify-between">
       <div className=" rounded-[12px] bg-white w-[31%] h-[160px] flex items-center border-[#ECE9FEEA] border-[1px]">
@@ -20,7 +51,7 @@ export default function DashboardCards() {
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-[28px] font-semibold">₦5,139</span>
+            <span className="text-[28px] font-semibold"> ₦{walletBalance}</span>
             <button className="flex rounded-[6px] items-center h-[32px] w-[100px] bg-[#4263EB] justify-center text-white  text-[14px]">
               <Link to="/wallet"> Fund wallet</Link>
             </button>

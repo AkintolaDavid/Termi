@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import RecentTransactions from "./RecentTransactions";
 import trans from "./assets/cards/trans.png";
@@ -11,15 +11,14 @@ import {
   ModalCloseButton,
   ModalBody,
   Text,
-  ModalFooter,
   Button,
 } from "@chakra-ui/react";
-import { useToast } from "./ToastContext";
+import { useToast } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios"; // Import axios for API calls
 
 export default function Wallet() {
-  const addToast = useToast();
+  const toast = useToast();
   const bank = "Providus Bank";
   const accountNumber = "1234567890"; // Example account number
   const accountName = "Abiola Ogunjobi"; // Example account name
@@ -29,34 +28,35 @@ export default function Wallet() {
   const [approved, setapproved] = useState(false);
   const [modalType, setModalType] = useState("");
   const [walletBalance, setWalletBalance] = useState(0); // State to hold wallet balance
-  const [fundAmount, setFundAmount] = useState(); // Amount to be funded by the user
+  const [fundAmount, setFundAmount] = useState(""); // Amount to be funded by the user
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token"); // Assuming token is stored in local storage
+  useEffect(() => {
+    const fetchWalletBalance = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/user/profile`,
+          {
+            headers: { Authorization: `Bearer ${token}` }, // Pass the token in the headers
+          }
+        );
 
-  // Fetch wallet balance on component mount
-  // useEffect(() => {
-  //   const fetchWalletBalance = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/wallet/balance`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         }
-  //       );
-  //       if (response.data.status) {
-  //         setWalletBalance(response.data.data.balance);
-  //       } else {
-  //         console.error("Error fetching wallet balance");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching wallet balance", error);
-  //     }
-  //   };
-  //   fetchWalletBalance();
-  // }, [token]);
+        setWalletBalance(response.data.data.wallet.balance); // Update wallet balance from response
+      } catch (error) {
+        console.error("Error fetching wallet balance:", error);
+        toast({
+          title: "Error fetching balance",
+          description: "Unable to retrieve wallet balance.",
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      }
+    };
+
+    fetchWalletBalance();
+  }, [token, toast]); // Add token and toast as dependencies
 
   // Handle copy action for account details
   const handleCopy = (text) => {
@@ -69,18 +69,32 @@ export default function Wallet() {
   const handleBVN = () => {
     setapproved(true);
     onClose(); // Close the modal
-    addToast("Virtual account created successfully!", "success");
+    toast({
+      title: "Virtual account created successfully!",
+      status: "success",
+      duration: 4000,
+      isClosable: true,
+    });
     navigate("/wallet"); // Navigate to wallet
   };
 
-  // Handle the fund wallet modal submission
+  // Handle Fund Wallet
   const handleFundWallet = () => {
-    if (fundAmount <= 0) {
-      alert("Please enter a valid amount to fund your wallet.");
-      return;
+    // Check if the fundAmount is a valid number and is >= 100
+    const amount = parseFloat(fundAmount);
+
+    if (isNaN(amount) || amount < 100) {
+      toast({
+        title: "Amount too low",
+        description: "Please enter an amount greater than ₦100.",
+        status: "warning",
+        duration: 4000,
+        isClosable: true,
+      });
+      return; // Do not proceed if the amount is less than 100 or invalid
     }
-    // Add logic here to proceed with funding
-    // For example, call an API to fund the wallet
+
+    // Proceed with the payment
     navigate("/walletproceed", { state: { amount: fundAmount } }); // Passing the amount to proceed
   };
 
@@ -113,15 +127,15 @@ export default function Wallet() {
                       </label>
                       <input
                         type="number"
-                        className="h-[38px] text-[#7E868E] pl-3 rounded-[6px] text-[13px]  border-[1px] border-[#E4E6EA] "
+                        className="h-[38px] text-[#7E868E] pl-3 rounded-[6px] text-[13px] border-[1px] border-[#E4E6EA]"
                         placeholder="Enter amount"
                         value={fundAmount}
-                        onChange={(e) => setFundAmount(e.target.value)}
+                        onChange={(e) => setFundAmount(e.target.value)} // Update state on input change
                       />
                     </div>
 
                     <Button
-                      onClick={handleFundWallet}
+                      onClick={handleFundWallet} // Call the handleFundWallet function
                       w="500px"
                       h="45px"
                       bg="#4263EB"
@@ -139,7 +153,7 @@ export default function Wallet() {
                       </span>
                       <div className="flex flex-col">
                         <span className="text-[20px] font-semibold">
-                          BVN Details{" "}
+                          BVN Details
                         </span>
                         <span className="text-[13px] font-normal">
                           We need your BVN details to create a wallet and
@@ -154,7 +168,7 @@ export default function Wallet() {
                       </label>
                       <input
                         type="number"
-                        className="h-[38px] text-[#7E868E] pl-3 rounded-[12px] text-[14px]  border-[1px] border-[#E0E0E0] "
+                        className="h-[38px] text-[#7E868E] pl-3 rounded-[12px] text-[14px]  border-[1px] border-[#E0E0E0]"
                         placeholder="Enter BVN"
                       />
                     </div>
@@ -164,7 +178,7 @@ export default function Wallet() {
                       </label>
                       <input
                         type="tel"
-                        className="h-[38px] text-[#7E868E] pl-3 rounded-[12px] text-[14px]  border-[1px] border-[#E0E0E0] "
+                        className="h-[38px] text-[#7E868E] pl-3 rounded-[12px] text-[14px]  border-[1px] border-[#E0E0E0]"
                         placeholder="Enter phone number"
                       />
                     </div>
@@ -174,7 +188,7 @@ export default function Wallet() {
                       </label>
                       <input
                         type="date"
-                        className="h-[38px] pr-3 text-[#7E868E] pl-4 rounded-[12px] text-[14px]  border-[1px] border-[#E0E0E0] "
+                        className="h-[38px] pr-3 text-[#7E868E] pl-4 rounded-[12px] text-[14px]  border-[1px] border-[#E0E0E0]"
                         placeholder="Enter Date of Birth"
                       />
                     </div>
@@ -193,16 +207,16 @@ export default function Wallet() {
                 ) : null}
               </div>
             </ModalBody>
-            <ModalFooter></ModalFooter>
           </ModalContent>
         </Modal>
 
+        {/* Wallet Balance and Fund Wallet */}
         <div className="flex items-center justify-between w-[95%] h-[170px] mt-[2.5%] bg-white  pl-6 pt-5 gap-5">
           <div className="flex gap-4">
             <img src={trans} alt="trans" className="h-[120px] w-[150px]" />
             <div className="flex flex-col gap-1">
               <span className="text-[32px] font-semibold">
-                ₦{walletBalance.toFixed(2)}
+                ₦{walletBalance}
               </span>
               <span className="text-[#828282] text-[14px]">
                 Total wallet balance
@@ -291,6 +305,7 @@ export default function Wallet() {
           )}
         </div>
 
+        {/* Recent Transactions */}
         <div className="w-[95%] flex flex-col">
           <span className="text-[20px] font-semibold pt-10 pb-4">
             Recent Transactions

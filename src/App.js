@@ -14,7 +14,8 @@ import ApiConsole from "./ApiConsole";
 import WalletProceed from "./WalletProceed";
 import Wallet from "./Wallet";
 import Profile from "./Profile";
-import ProtectedLayout from "./ProtectedLayout"; // Import your ProtectedLayout
+import ProtectedLayout from "./ProtectedLayout";
+import SuccessPage from "./SuccessPage";
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
             />
             <Route path="/verifyotpsignup" element={<VerifyOtpSignup />} />
             <Route path="/newpassword" element={<Newpassword />} />
+            <Route path="/successpage" element={<SuccessPage />} />
 
             {/* Protected Routes */}
             <Route

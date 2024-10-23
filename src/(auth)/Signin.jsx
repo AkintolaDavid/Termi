@@ -1,28 +1,28 @@
-import React, { useState } from "react"; // Import useState for managing password visibility
+import React, { useState } from "react";
 import pic from "../assets/authimg/sign.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useToast } from "@chakra-ui/react";
-import { HiEye, HiEyeOff } from "react-icons/hi"; // Import icons for the eye visibility
-import axios from "axios"; // Import Axios for API requests
+import { useToast, CircularProgress } from "@chakra-ui/react"; // Import CircularProgress
+import { HiEye, HiEyeOff } from "react-icons/hi";
+import axios from "axios";
 
 export default function Signin() {
   const toast = useToast();
   const navigate = useNavigate();
 
-  // State for password visibility and inputs
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [password, setPassword] = useState(""); // State for password input
-  const [login, setEmail] = useState(""); // State for email or phone number input
+  const [password, setPassword] = useState("");
+  const [login, setEmail] = useState("");
+  const [loading, setLoading] = useState(false); // Loading state
 
   const handlePasswordToggle = () => {
-    setIsPasswordVisible((prev) => !prev); // Toggle the password visibility
+    setIsPasswordVisible((prev) => !prev);
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
+    setLoading(true); // Set loading to true
 
     try {
-      // Make API request to sign in
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/auth/login`,
         {
@@ -39,22 +39,20 @@ export default function Signin() {
           status: "success",
           duration: 5000,
           isClosable: true,
-          position: "top-right", // Position the toast
+          position: "top-right",
         });
         navigate("/dashboard");
       }
     } catch (error) {
-      // Handle errors
       console.error("Error during login:", error);
       const errorResponse = error.response?.data;
 
-      let errorMessage = "Login failed"; // Default message
+      let errorMessage = "Login failed";
       if (errorResponse) {
-        // If specific error for email is present
         if (errorResponse.errors && errorResponse.errors.login) {
-          errorMessage = "Please enter valid login credentials"; // Access the email error message
+          errorMessage = "Please enter valid login credentials";
         } else if (errorResponse.message) {
-          errorMessage = errorResponse.message; // Use general error message if available
+          errorMessage = errorResponse.message;
         }
       }
       toast({
@@ -64,6 +62,8 @@ export default function Signin() {
         isClosable: true,
         position: "top-right",
       });
+    } finally {
+      setLoading(false); // Reset loading state after processing
     }
   };
 
@@ -75,7 +75,7 @@ export default function Signin() {
 
       <div className="w-[50%] flex justify-center items-center">
         <form
-          onSubmit={handleSubmit} // Add onSubmit to the form
+          onSubmit={handleSubmit}
           className="w-[65%] bg-[#F7FAFC] h-[84%] flex flex-col items-center justify-center rounded-[12px] border-[1px] border-[#EFF0F2] p-2 gap-4"
         >
           <div className="text-3xl">👋</div>
@@ -89,11 +89,11 @@ export default function Signin() {
                 Email
               </label>
               <input
-                type="text" // Use appropriate input type
-                value={login} // Bind input value to state
-                onChange={(e) => setEmail(e.target.value)} // Update state on change
+                type="text"
+                value={login}
+                onChange={(e) => setEmail(e.target.value)}
                 className="h-8 text-[#7E868E] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
-                required // Add required validation
+                required
               />
             </div>
             <div className="flex flex-col w-[80%] gap-1">
@@ -101,17 +101,15 @@ export default function Signin() {
                 Password
               </label>
               <div className="relative">
-                {" "}
-                {/* Relative position for the eye icon */}
                 <input
-                  type={isPasswordVisible ? "text" : "password"} // Toggle between text and password
-                  value={password} // Bind the input value to state
-                  onChange={(e) => setPassword(e.target.value)} // Update password state
+                  type={isPasswordVisible ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="h-8 text-[#7E868E] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA] w-full"
-                  required // Add required validation
+                  required
                 />
                 <span
-                  onClick={handlePasswordToggle} // Toggle password visibility on click
+                  onClick={handlePasswordToggle}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
                 >
                   {isPasswordVisible ? (
@@ -135,11 +133,17 @@ export default function Signin() {
           </div>
 
           <button
-            type="submit" // Specify button type as submit
+            type="submit"
             className="bg-[#4C6FFF] mt-1 rounded-[6px] h-9 w-[80%] text-[12px] font-medium text-white"
+            disabled={loading} // Disable button while loading
           >
-            Sign in
+            {loading ? (
+              <CircularProgress isIndeterminate color="blue.300" size="24px" />
+            ) : (
+              "Sign in"
+            )}
           </button>
+
           <Link to="/" className="mt-3">
             <span className="text-[14px] text-[#586979] underline underline-offset-1">
               Do not have an account? Sign Up

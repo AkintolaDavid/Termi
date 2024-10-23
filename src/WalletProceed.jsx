@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-import { useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
-// Assets for check and uncheck icons
 import checkIcon from "./assets/cards/check.png";
 import uncheckIcon from "./assets/cards/uncheck.png";
 import paystackLogo from "./assets/paystack.png";
@@ -18,15 +16,35 @@ export default function PaymentComponent() {
   const { amount } = location.state; // Amount passed through location.state
   const [selectedMethod, setSelectedMethod] = useState(null); // Track selected method
   const [loading, setLoading] = useState(false); // Loading state for button
+  const [paymentUrl, setPaymentUrl] = useState(null); // For handling iframe
+  const [showIframe, setShowIframe] = useState(false); // Track iframe visibility
   const toast = useToast();
   const token = localStorage.getItem("token"); // Ensure a valid token is set in localStorage
+  const navigate = useNavigate();
 
-  // Paystack Payment Initialization
+  // Validate the amount before initiating the payment
+  const validateAmount = () => {
+    if (!amount || amount < 100) {
+      toast({
+        title: "Amount too low",
+        description: "Please enter an amount higher than ₦100.",
+        status: "warning",
+        duration: 4000,
+        isClosable: true,
+      });
+      return false;
+    }
+    return true;
+  };
+
+  // Function to handle Paystack payment initialization
   const initiatePaystackPayment = async () => {
     setLoading(true);
 
+    if (!validateAmount()) return; // Validate the amount
+
     const paymentPayload = {
-      amount: amount, // Convert amount to kobo (if using Paystack)
+      amount: amount, // Paystack expects the amount in kobo
     };
 
     try {
@@ -35,7 +53,7 @@ export default function PaymentComponent() {
         paymentPayload,
         {
           headers: {
-            Authorization: ` Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -43,12 +61,14 @@ export default function PaymentComponent() {
       if (response.data.status) {
         toast({
           title: "Payment initiated",
-          description: "Redirecting to Paystack payment page.",
+          description: "Loading Paystack payment page.",
           status: "success",
           duration: 6000,
           isClosable: true,
         });
-        window.location.href = response.data.data[0].url; // Redirect to Paystack payment page
+
+        setPaymentUrl(response.data.data[0].url); // Set payment URL for iframe
+        setShowIframe(true); // Show iframe
       } else {
         toast({
           title: "Payment failed",
@@ -75,17 +95,19 @@ export default function PaymentComponent() {
     }
   };
 
-  // Flutterwave Payment Initialization
+  // Function to handle Flutterwave payment initialization
   const initiateFlutterwavePayment = async () => {
     setLoading(true);
 
+    if (!validateAmount()) return; // Validate the amount
+
     const paymentPayload = {
-      amount: amount, // Convert amount to kobo (if using Flutterwave)
+      amount: amount, // Flutterwave also expects the amount in kobo
     };
 
     try {
       const response = await axios.post(
-        ` ${process.env.REACT_APP_BASE_URL}/payment/flw/initialize`,
+        `${process.env.REACT_APP_BASE_URL}/payment/flw/initialize`,
         paymentPayload,
         {
           headers: {
@@ -97,12 +119,14 @@ export default function PaymentComponent() {
       if (response.data.status) {
         toast({
           title: "Payment initiated",
-          description: "Redirecting to Flutterwave payment page.",
+          description: "Loading Flutterwave payment page.",
           status: "success",
           duration: 6000,
           isClosable: true,
         });
-        window.location.href = response.data.data.url; // Redirect to Flutterwave payment page
+
+        setPaymentUrl(response.data.data.url); // Set payment URL for iframe
+        setShowIframe(true); // Show iframe
       } else {
         toast({
           title: "Payment failed",
@@ -128,6 +152,63 @@ export default function PaymentComponent() {
       setLoading(false);
     }
   };
+
+  // Handling successful or failed payment callback URL
+  useEffect(() => {
+    const handlePaymentCallback = async () => {
+      const params = new URLSearchParams(window.location.search);
+      const paymentReference = params.get("reference");
+
+      if (paymentReference) {
+        try {
+          const response = await axios.post(
+            `${process.env.REACT_APP_BASE_URL}/payment/verify/${paymentReference}`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (response.data.status) {
+            toast({
+              title: "Payment Successful",
+              description: "Redirecting to your dashboard.",
+              status: "success",
+              duration: 4000,
+              isClosable: true,
+            });
+            setShowIframe(false); // Hide iframe after success
+          } else {
+            toast({
+              title: "Payment Failed",
+              description: response.data.message || "Please try again.",
+              status: "error",
+              duration: 5000,
+              isClosable: true,
+            });
+          }
+        } catch (error) {
+          console.error(
+            "Error verifying payment:",
+            error.response?.data || error.message
+          );
+          toast({
+            title: "Error",
+            description: "Something went wrong. Please try again.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } finally {
+          navigate("/dashboard"); // Redirect to dashboard
+        }
+      }
+    };
+
+    handlePaymentCallback(); // Check the URL parameters for payment callback
+  }, [navigate, token]);
 
   return (
     <div className="bg-[#f8fafc] w-[100%] h-[100%]">
@@ -200,22 +281,27 @@ export default function PaymentComponent() {
                 Fund wallet with Flutterwave
               </span>
               <span className="text-[14px] text-[#243656] font-normal">
-                Pay with Card, Bank Transfer, and USSD
+                Pay with Card, Bank Transfer
               </span>
             </div>
           </div>
+
+          {/* Iframe to show payment page */}
+          {showIframe && (
+            <iframe
+              src={paymentUrl}
+              style={{ width: "100%", height: "600px", border: "none" }}
+              title="Payment"
+            ></iframe>
+          )}
         </div>
 
-        {/* Payment Summary */}
         <div className="w-[25%]">
           <div className="flex flex-col items-center justify-center bg-white w-[370px] h-[200px] text-[20px] font-medium gap-4 rounded-[8px]">
-            <div className="flex justify-between w-[70%]">
-              <span className="text-[#5D5F5F]">Subtotal</span>
-              <span>₦{amount}</span>
-            </div>
+            <p className="text-[20px] text-[#5D5F5F]">Wallet Funding</p>{" "}
             <div className="flex justify-between w-[70%]">
               <span className="text-[#5D5F5F]">Total</span>
-              <span>₦{amount}</span>
+              <span className="text-[#5D5F5F]">₦{amount}</span>
             </div>
             <button
               onClick={() => {
@@ -248,10 +334,32 @@ export default function PaymentComponent() {
               }}
               className="h-[43px] w-[300px] bg-[#4263EB] text-[16px] text-white rounded-[8px] mt-10"
             >
-              Proceed
+              {loading ? "Processing..." : "Proceed with Payment"}
             </button>
           </div>
         </div>
+        {/* <div className="flex flex-col gap-5 w-[25%]">
+          <div className="w-[100%] bg-[#ffffff] p-6 shadow-lg">
+            <p className="text-[18px] text-[#243656] font-semibold">Summary</p>
+            <p className="text-[16px] text-[#5c6b82]">Wallet Funding</p>
+            <hr className="my-4" />
+            <div className="flex justify-between text-[14px] font-medium text-[#5c6b82]">
+              <span>Amount:</span>
+              <span>₦{amount}</span>
+            </div>
+          </div>
+          <button
+            className="w-full py-3 bg-[#0067f4] text-white text-center text-[16px] font-medium rounded-lg shadow-md"
+            onClick={
+              selectedMethod === "paystack"
+                ? initiatePaystackPayment
+                : initiateFlutterwavePayment
+            }
+            disabled={!selectedMethod || loading}
+          >
+            {loading ? "Processing..." : "Proceed with Payment"}
+          </button>
+        </div> */}
       </div>
     </div>
   );
