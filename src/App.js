@@ -24,8 +24,8 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             {/* Unprotected Routes */}
-            <Route path="/signin" element={<Signin />} />
-            <Route path="/" element={<Signup />} />
+            <Route path="/" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/resetpassword" element={<ResetPassword />} />
             <Route
               path="/verifyotpforgetpassword"

@@ -37,7 +37,7 @@ export default function Newpassword() {
           </div>
 
           {/* Submit Button */}
-          <Link to="/signin">
+          <Link to="/">
             <button
               className="mt-8 w-32 h-10 bg-[#4C6FFF] text-white rounded-md hover:bg-[#2B4AD1] transition duration-200"
               onClick={handleSubmit}
@@ -46,7 +46,7 @@ export default function Newpassword() {
             </button>
           </Link>
         </div>
-        <Link to="/signin" className="mt-3">
+        <Link to="/" className="mt-3">
           <span className="text-[14px] text-[#586979] underline underline-offset-1">
             Already have an account? Login
           </span>

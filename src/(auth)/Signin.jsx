@@ -144,7 +144,7 @@ export default function Signin() {
             )}
           </button>
 
-          <Link to="/" className="mt-3">
+          <Link to="/signup" className="mt-3">
             <span className="text-[14px] text-[#586979] underline underline-offset-1">
               Do not have an account? Sign Up
             </span>

@@ -196,7 +196,7 @@ export default function Signup() {
               "Register" // Button text
             )}
           </button>
-          <Link to="/signin" className="mt-3">
+          <Link to="/" className="mt-3">
             <span className="text-sm text-[#586979] underline">
               Already have an account? Login
             </span>
