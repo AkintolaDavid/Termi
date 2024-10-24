@@ -85,8 +85,10 @@ export default function Signup() {
           <p className="text-sm font-medium mb-5">It's free and easy</p>
 
           <div className="flex flex-col w-full items-center gap-5">
-            <div className="flex justify-between w-4/5 gap-1">
-              <div className="flex flex-col w-full">
+            <div className="flex flex-col xl:flex-row justify-between w-[90%] lg:w-4/5 gap-1">
+              <div className="flex flex-col w-full ">
+                {" "}
+                {/* Adjust width for larger screens */}
                 <label className="text-[15px] font-medium text-[#425466]">
                   Your firstname
                 </label>
@@ -100,7 +102,9 @@ export default function Signup() {
                   required
                 />
               </div>
-              <div className="flex flex-col w-full">
+              <div className="flex flex-col w-full ">
+                {" "}
+                {/* Adjust width for larger screens */}
                 <label className="text-[15px] font-medium text-[#425466]">
                   Your lastname
                 </label>
@@ -109,13 +113,14 @@ export default function Signup() {
                   name="last_name"
                   value={formData.last_name}
                   onChange={handleChange}
-                  className="h-12 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA]  text-[15px]"
+                  className="h-12 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA] text-[15px]"
                   placeholder="Enter your lastname"
                   required
                 />
               </div>
             </div>
-            <div className="flex justify-between w-4/5 gap-1">
+
+            <div className="flex flex-col xl:flex-row justify-between w-[90%] lg:w-4/5 gap-1">
               <div className="flex flex-col w-full">
                 <label className="text-[15px] font-medium text-[#425466]">
                   Your phone number

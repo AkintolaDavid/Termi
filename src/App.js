@@ -16,6 +16,8 @@ import Wallet from "./Wallet";
 import Profile from "./Profile";
 import ProtectedLayout from "./ProtectedLayout";
 import SuccessPage from "./SuccessPage";
+import PaymentFailed from "./FailedPage";
+import PaymentSuccess from "./SuccessPage";
 
 export default function App() {
   return (
@@ -33,7 +35,8 @@ export default function App() {
             />
             <Route path="/verifyotpsignup" element={<VerifyOtpSignup />} />
             <Route path="/newpassword" element={<Newpassword />} />
-            <Route path="/successpage" element={<SuccessPage />} />
+            <Route path="/failedpage" element={<PaymentFailed />} />
+            <Route path="/successpage" element={<PaymentSuccess />} />
 
             {/* Protected Routes */}
             <Route
