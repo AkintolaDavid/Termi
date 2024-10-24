@@ -8,7 +8,7 @@ export default function PaymentFailed() {
   // Redirect after 5 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/retry-payment"); // Replace with your retry payment URL
+      navigate("/dashboard"); // Replace with your retry payment URL
     }, 5000);
 
     // Cleanup the timer on component unmount
