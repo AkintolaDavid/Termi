@@ -101,19 +101,20 @@ export default function Wallet() {
   return (
     <>
       <Header />
-      <div className="w-full h-[calc(100vh-94px)] flex flex-col items-center bg-[#f8fafc]">
+      <div className="w-full h-[calc(100vh-94px)] flex flex-col items-center ">
         {/* Modal */}
         <Modal isCentered isOpen={isOpen} onClose={onClose}>
-          {overlay}
+          <ModalOverlay /> {/* Transparent overlay */}
           <ModalContent
+            bg="rgba(255, 255, 255, 1)" // Semi-transparent background for the modal content
             h={modalType === "createAccount" ? "600px" : "400px"}
             w={modalType === "createAccount" ? "850px" : "600px"}
             maxW={modalType === "createAccount" ? "850px" : "600px"}
+            boxShadow="lg"
           >
             <ModalCloseButton />
             <ModalBody>
               <div className="flex h-full w-full flex-col justify-center items-center gap-10">
-                {/* Conditionally render based on modalType */}
                 {modalType === "fundWallet" ? (
                   <>
                     <div className="w-[90%]">
@@ -130,12 +131,12 @@ export default function Wallet() {
                         className="h-[38px] text-[#7E868E] pl-3 rounded-[6px] text-[13px] border-[1px] border-[#E4E6EA]"
                         placeholder="Enter amount"
                         value={fundAmount}
-                        onChange={(e) => setFundAmount(e.target.value)} // Update state on input change
+                        onChange={(e) => setFundAmount(e.target.value)}
                       />
                     </div>
 
                     <Button
-                      onClick={handleFundWallet} // Call the handleFundWallet function
+                      onClick={handleFundWallet}
                       w="500px"
                       h="45px"
                       bg="#4263EB"
@@ -209,7 +210,6 @@ export default function Wallet() {
             </ModalBody>
           </ModalContent>
         </Modal>
-
         {/* Wallet Balance and Fund Wallet */}
         <div className="flex items-center justify-between w-[95%] h-[170px] mt-[2.5%] bg-white  pl-6 pt-5 gap-5">
           <div className="flex gap-4">
@@ -218,7 +218,7 @@ export default function Wallet() {
               <span className="text-[32px] font-semibold">
                 ₦{walletBalance}
               </span>
-              <span className="text-[#828282] text-[14px]">
+              <span className="text-[#828282] text-[16px]">
                 Total wallet balance
               </span>
               <button
@@ -227,7 +227,7 @@ export default function Wallet() {
                   setModalType("fundWallet"); // Set modal type
                   onOpen();
                 }}
-                className="font-medium text-white text-[16px] rounded-[6px] bg-[#4263EB] h-[30px] w-[120px]"
+                className="font-medium text-white text-[18px] rounded-[6px] bg-[#4263EB] h-[40px] w-[150px]"
               >
                 Fund wallet
               </button>
@@ -284,10 +284,10 @@ export default function Wallet() {
             </div>
           ) : (
             <div className="mr-20 flex flex-col items-center justify-center gap-2 mb-3">
-              <span className="text-[20px] font-semibold">
+              <span className="text-[22px] font-semibold">
                 Virtual Account Details
               </span>
-              <span className="text-[#828282] text-[12px] leading-4 w-[250px] text-center">
+              <span className="text-[#828282] text-[16px] leading-4 w-[300px] text-center">
                 Please complete your onboarding process to generate your virtual
                 account
               </span>
@@ -297,7 +297,7 @@ export default function Wallet() {
                   setModalType("createAccount"); // Set modal type
                   onOpen();
                 }}
-                className="font-medium text-white text-[16px] rounded-[6px] bg-[#4263EB] h-[30px] w-[150px]"
+                className="font-medium text-white text-[18px] rounded-[6px] bg-[#4263EB] h-[40px] w-[170px]"
               >
                 Create Account
               </button>
@@ -306,10 +306,7 @@ export default function Wallet() {
         </div>
 
         {/* Recent Transactions */}
-        <div className="w-[95%] flex flex-col">
-          <span className="text-[20px] font-semibold pt-10 pb-4">
-            Recent Transactions
-          </span>
+        <div className="w-[95%] flex flex-col mt-10">
           <RecentTransactions />
         </div>
       </div>

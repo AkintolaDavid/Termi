@@ -65,9 +65,9 @@ export default function Header() {
           status: "success",
           duration: 5000,
           isClosable: true,
-          position: "top-right", // Position the toast
+          position: "top", // Position the toast
         });
-        navigate("/signin");
+        navigate("/");
       }
     } catch (error) {
       // Handle errors
@@ -106,12 +106,18 @@ export default function Header() {
               setshowdropdown(!showdropdown);
             }}
           >
-            <Avatar size="sm" name="John Doe" src={pic} />
+            <Avatar
+              size="sm"
+              name={`${firstname} ${lastname}`}
+              bg="#4263EB"
+              color="white" // Optional: set text color to white
+            />
+
             <div className="flex flex-col">
-              <span className="text-[14px]">
+              <span className="text-[16px]">
                 {firstname} {lastname}
               </span>
-              <span className="text-[13px]">{useremail}</span>
+              <span className="text-[16px]">{useremail}</span>
             </div>
             {showdropdown && (
               <div

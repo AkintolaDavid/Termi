@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import axios from "axios"; // Import Axios for API calls
-import { useToast } from "@chakra-ui/react";
-
+import { useToast, CircularProgress } from "@chakra-ui/react";
 export default function Profile() {
   const toast = useToast();
   const [profile, setProfile] = useState(true);
   const [security, setSecurity] = useState(false);
   const token = localStorage.getItem("token");
-
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -97,6 +96,7 @@ export default function Profile() {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (!validateFormData()) return; // Run validations before proceeding
 
     try {
@@ -119,12 +119,14 @@ export default function Profile() {
       console.log(response.data);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleUpdateSecurity = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     // Check if passwords match
     if (securityData.password !== securityData.password_confirmation) {
       toast({
@@ -158,6 +160,8 @@ export default function Profile() {
     } catch (error) {
       console.error(error.response ? error.response.data : error.message);
       // Handle specific error cases
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -170,11 +174,11 @@ export default function Profile() {
             <span className="text-[20px] font-semibold">
               Account Information
             </span>
-            <span className="text-[14px] text-[#929EAE]">
+            <span className="text-[16px] text-[#929EAE]">
               Update your account information
             </span>
           </div>
-          <div className="h-[35px] flex w-[250px] rounded-md border-[1px]">
+          <div className="h-[45px] flex w-[300px] rounded-md border-[1px]">
             <button
               onClick={handleToggleProfile}
               className={`flex items-center justify-center px-4 rounded-[4px] py-2 border-[#EEEEEE] w-[50%] ${
@@ -201,7 +205,7 @@ export default function Profile() {
               </div>
               <div className="flex justify-between w-[100%] gap-1 mt-[15px]">
                 <div className="flex flex-col gap-1">
-                  <label className="text-[14px] font-medium text-[#1B212D]">
+                  <label className="text-[16px] font-medium text-[#1B212D]">
                     Your firstname
                   </label>
                   <input
@@ -209,12 +213,12 @@ export default function Profile() {
                     value={formData.firstname}
                     onChange={handleInputChange}
                     required
-                    className="h-[37px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
+                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="Ayodele"
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-[14px] font-medium text-[#1B212D]">
+                  <label className="text-[16px] font-medium text-[#1B212D]">
                     Your lastname
                   </label>
                   <input
@@ -222,7 +226,7 @@ export default function Profile() {
                     value={formData.lastname}
                     onChange={handleInputChange}
                     required
-                    className="h-[37px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
+                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="Frank"
                   />
                 </div>
@@ -230,7 +234,7 @@ export default function Profile() {
 
               <div className="flex justify-between w-[100%] gap-1 mt-[15px]">
                 <div className="flex flex-col gap-1 ">
-                  <label className="text-[14px] font-medium text-[#1B212D]">
+                  <label className="text-[16px] font-medium text-[#1B212D]">
                     Date of birth
                   </label>
                   <input
@@ -238,19 +242,19 @@ export default function Profile() {
                     name="dob"
                     onChange={handleInputChange}
                     required
-                    className="h-[37px] text-[#78778B] w-[340px] pl-3 pr-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
+                    className="h-[50px] text-[#78778B] w-[340px] pl-3 pr-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="27/09/1998"
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-[14px] font-medium text-[#1B212D]">
+                  <label className="text-[16px] font-medium text-[#1B212D]">
                     Mobile Number
                   </label>
                   <input
                     name="mobile"
                     onChange={handleInputChange}
                     required
-                    className="h-[37px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
+                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="+123 456 7890"
                   />
                 </div>
@@ -258,7 +262,7 @@ export default function Profile() {
 
               <div className="flex justify-between w-[100%] gap-1 mt-[15px]">
                 <div className="flex flex-col gap-1 ">
-                  <label className="text-[14px] font-medium text-[#1B212D]">
+                  <label className="text-[16px] font-medium text-[#1B212D]">
                     Email
                   </label>
                   <input
@@ -266,19 +270,19 @@ export default function Profile() {
                     name="email"
                     onChange={handleInputChange}
                     required
-                    className="h-[37px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
+                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="example@domain.com"
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-[14px] font-medium text-[#1B212D]">
+                  <label className="text-[16px] font-medium text-[#1B212D]">
                     Country
                   </label>
                   <input
                     name="country"
                     onChange={handleInputChange}
                     required
-                    className="h-[37px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
+                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="Country"
                   />
                 </div>
@@ -286,26 +290,26 @@ export default function Profile() {
 
               <div className="flex justify-between w-[100%] gap-1 mt-[15px]">
                 <div className="flex flex-col gap-1 ">
-                  <label className="text-[14px] font-medium text-[#1B212D]">
+                  <label className="text-[16px] font-medium text-[#1B212D]">
                     State
                   </label>
                   <input
                     name="state"
                     onChange={handleInputChange}
                     required
-                    className="h-[37px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
+                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="State"
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-[14px] font-medium text-[#1B212D]">
+                  <label className="text-[16px] font-medium text-[#1B212D]">
                     Location
                   </label>
                   <input
                     name="location"
                     onChange={handleInputChange}
                     required
-                    className="h-[37px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
+                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="Location"
                   />
                 </div>
@@ -314,9 +318,18 @@ export default function Profile() {
               <div className="mt-5 flex justify-between">
                 <button
                   type="submit"
-                  className="bg-[#4263EB] text-white w-[700px] text-[16px] mt-6 h-[37px] rounded-[10px]"
+                  className="bg-[#4263EB] text-white w-[700px] text-[16px] mt-6 h-[50px] rounded-[10px]"
+                  disabled={loading}
                 >
-                  Update
+                  {loading ? (
+                    <CircularProgress
+                      isIndeterminate
+                      color="blue.300"
+                      size="24px"
+                    />
+                  ) : (
+                    "Update Profile"
+                  )}
                 </button>
               </div>
             </form>
@@ -329,8 +342,8 @@ export default function Profile() {
                   Settings
                 </span>
               </div>
-              <div className="flex flex-col gap-1">
-                <label className="text-[14px] font-medium text-[#1B212D]">
+              {/* <div className="flex flex-col gap-1">
+                <label className="text-[16px] font-medium text-[#1B212D]">
                   Old Password
                 </label>
                 <input
@@ -339,13 +352,13 @@ export default function Profile() {
                   value={securityData.oldPassword}
                   onChange={handleSecurityChange}
                   required
-                  className="h-[37px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
+                  className="h-[50px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                   placeholder="Enter your old password"
                 />
-              </div>
+              </div> */}
 
               <div className="flex flex-col gap-1">
-                <label className="text-[14px] font-medium text-[#1B212D]">
+                <label className="text-[16px] font-medium text-[#1B212D]">
                   New Password
                 </label>
                 <input
@@ -354,13 +367,13 @@ export default function Profile() {
                   value={securityData.password} // Updated value
                   onChange={handleSecurityChange}
                   required
-                  className="h-[37px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
+                  className="h-[50px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                   placeholder="Enter your new password"
                 />
               </div>
 
-              <div className="flex flex-col gap-1">
-                <label className="text-[14px] font-medium text-[#1B212D]">
+              <div className="flex flex-col gap-1 mt-4">
+                <label className="text-[16px] font-medium text-[#1B212D]">
                   Repeat New Password
                 </label>
                 <input
@@ -369,16 +382,25 @@ export default function Profile() {
                   value={securityData.password_confirmation} // Updated value
                   onChange={handleSecurityChange}
                   required
-                  className="h-[37px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
+                  className="h-[50px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                   placeholder="Repeat your new password"
                 />
               </div>
 
               <button
                 type="submit"
-                className="bg-[#4263EB] text-white w-[700px] text-[16px] mt-6 h-[37px] rounded-[10px]"
+                className="bg-[#4263EB] text-white w-[700px] text-[16px] mt-6 h-[50px] rounded-[10px]"
+                disabled={loading}
               >
-                Change Password
+                {loading ? (
+                  <CircularProgress
+                    isIndeterminate
+                    color="blue.300"
+                    size="24px"
+                  />
+                ) : (
+                  "Change Password"
+                )}
               </button>
             </form>
           )}

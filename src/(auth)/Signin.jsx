@@ -83,21 +83,21 @@ export default function Signin() {
           <span className="text-[13px] font-medium mb-3">
             Let's build something great
           </span>
-          <div className="flex flex-col w-full items-center gap-2">
+          <div className="flex flex-col w-full items-center gap-5">
             <div className="flex flex-col w-[80%] gap-1">
-              <label className="text-[13px] font-medium text-[#425466]">
+              <label className="text-[15px] font-medium text-[#425466]">
                 Email
               </label>
               <input
                 type="text"
                 value={login}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-8 text-[#7E868E] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
+                className="h-12 text-[#7E868E] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"
                 required
               />
             </div>
             <div className="flex flex-col w-[80%] gap-1">
-              <label className="text-[13px] font-medium text-[#425466]">
+              <label className="text-[15px] font-medium text-[#425466]">
                 Password
               </label>
               <div className="relative">
@@ -105,7 +105,7 @@ export default function Signin() {
                   type={isPasswordVisible ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="h-8 text-[#7E868E] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA] w-full"
+                  className="h-12 text-[#7E868E] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA] w-full"
                   required
                 />
                 <span
@@ -120,11 +120,11 @@ export default function Signin() {
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-[10px] text-[#8F90AD]">
+                <span className="text-[13px] text-[#8F90AD]">
                   Must be at least 8 characters
                 </span>
                 <Link to="/resetpassword">
-                  <span className="text-[10px] text-[#8F90AD] underline underline-offset-1">
+                  <span className="text-[13px] text-[#8F90AD] underline underline-offset-1">
                     Forgot password?
                   </span>
                 </Link>
@@ -134,7 +134,7 @@ export default function Signin() {
 
           <button
             type="submit"
-            className="bg-[#4C6FFF] mt-1 rounded-[6px] h-9 w-[80%] text-[12px] font-medium text-white"
+            className="bg-[#4C6FFF] mt-1 rounded-[6px] h-12 w-[80%] text-[16px] font-medium text-white"
             disabled={loading} // Disable button while loading
           >
             {loading ? (
@@ -145,7 +145,7 @@ export default function Signin() {
           </button>
 
           <Link to="/signup" className="mt-3">
-            <span className="text-[14px] text-[#586979] underline underline-offset-1">
+            <span className="text-[15px] text-[#586979] underline underline-offset-1">
               Do not have an account? Sign Up
             </span>
           </Link>

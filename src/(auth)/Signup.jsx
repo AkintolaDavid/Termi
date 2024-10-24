@@ -82,12 +82,12 @@ export default function Signup() {
           onSubmit={handleSubmit}
         >
           <h2 className="text-2xl font-semibold">Create your account</h2>
-          <p className="text-sm font-medium mb-2">It's free and easy</p>
+          <p className="text-sm font-medium mb-5">It's free and easy</p>
 
-          <div className="flex flex-col w-full items-center gap-2">
+          <div className="flex flex-col w-full items-center gap-5">
             <div className="flex justify-between w-4/5 gap-1">
               <div className="flex flex-col w-full">
-                <label className="text-sm font-medium text-[#425466]">
+                <label className="text-[15px] font-medium text-[#425466]">
                   Your firstname
                 </label>
                 <input
@@ -95,13 +95,13 @@ export default function Signup() {
                   name="first_name"
                   value={formData.first_name}
                   onChange={handleChange}
-                  className="h-8 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA]"
+                  className="h-12 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA] text-[15px]"
                   placeholder="Enter your firstname"
                   required
                 />
               </div>
               <div className="flex flex-col w-full">
-                <label className="text-sm font-medium text-[#425466]">
+                <label className="text-[15px] font-medium text-[#425466]">
                   Your lastname
                 </label>
                 <input
@@ -109,7 +109,7 @@ export default function Signup() {
                   name="last_name"
                   value={formData.last_name}
                   onChange={handleChange}
-                  className="h-8 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA]"
+                  className="h-12 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA]  text-[15px]"
                   placeholder="Enter your lastname"
                   required
                 />
@@ -117,7 +117,7 @@ export default function Signup() {
             </div>
             <div className="flex justify-between w-4/5 gap-1">
               <div className="flex flex-col w-full">
-                <label className="text-sm font-medium text-[#425466]">
+                <label className="text-[15px] font-medium text-[#425466]">
                   Your phone number
                 </label>
                 <input
@@ -125,13 +125,13 @@ export default function Signup() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="h-8 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA]"
+                  className="h-12 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA]  text-[15px]"
                   placeholder="Enter phone number"
                   required
                 />
               </div>
               <div className="flex flex-col w-full">
-                <label className="text-sm font-medium text-[#425466]">
+                <label className="text-[15px] font-medium text-[#425466]">
                   Your Email
                 </label>
                 <input
@@ -139,14 +139,14 @@ export default function Signup() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="h-8 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA]"
+                  className="h-12 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA]  text-[15px]"
                   placeholder="Enter your email"
                   required
                 />
               </div>
             </div>
             <div className="flex flex-col w-4/5 gap-1">
-              <label className="text-sm font-medium text-[#425466]">
+              <label className="text-[15px] font-medium text-[#425466]">
                 Company name
               </label>
               <input
@@ -154,13 +154,13 @@ export default function Signup() {
                 name="companyName"
                 value={formData.companyName}
                 onChange={handleChange}
-                className="h-8 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA]"
+                className="h-12 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA]  text-[15px]"
                 placeholder="Enter your company name"
                 required
               />
             </div>
             <div className="flex flex-col w-4/5 gap-1">
-              <label className="text-sm font-medium text-[#425466]">
+              <label className="text-[15px] font-medium text-[#425466]">
                 Your password
               </label>
               <input
@@ -168,18 +168,18 @@ export default function Signup() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="h-8 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA]"
+                className="h-12 text-[#7E868E] pl-3 rounded-md border border-[#E4E6EA]  text-[15px]"
                 placeholder="Enter your password"
                 required
               />
-              <span className="text-xs text-[#8F90AD]">
+              <span className="text-sm text-[#8F90AD]">
                 Must be at least 8 characters
               </span>
             </div>
           </div>
-          <div className="flex w-4/5 items-start gap-3 mt-1">
+          <div className="flex w-4/5 items-start gap-3 mt-4">
             <input type="checkbox" className="h-6 w-6" required />
-            <span className="text-xs text-[#586979]">
+            <span className="text-sm text-[#586979]">
               By creating an account means you agree to the{" "}
               <span className="font-medium">Terms and Conditions</span> and our{" "}
               <span className="font-medium">Privacy Policy</span>
@@ -187,7 +187,7 @@ export default function Signup() {
           </div>
           <button
             type="submit"
-            className="bg-[#4C6FFF] mt-3 rounded-md h-9 w-4/5 text-sm font-medium text-white flex items-center justify-center"
+            className="bg-[#4C6FFF] mt-4 rounded-md h-12 w-4/5 text-[16px] font-medium text-white flex items-center justify-center"
             disabled={loading} // Disable button while loading
           >
             {loading ? (
