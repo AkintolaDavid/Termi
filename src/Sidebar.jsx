@@ -18,11 +18,11 @@ export default function Sidebar() {
       </div>
       <div className="flex flex-col h-[calc(100vh-91px)] justify-between pb-6 pl-[5%] pr-[5%]">
         <div className="flex flex-col">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-4">
             <NavLink
               to="/dashboard"
               className={({ isActive }) =>
-                `w-full h-[40px] rounded-[6px] flex items-center text-[15px] font-semibold gap-3 ${
+                `w-full h-[40px] rounded-[6px] flex items-center text-[18px] font-semibold gap-3 ${
                   isActive
                     ? "bg-[#4263EB] text-white"
                     : "text-black hover:bg-[#4263EB] hover:text-white"
@@ -31,7 +31,7 @@ export default function Sidebar() {
             >
               <HiOutlineSquares2X2
                 className={({ isActive }) =>
-                  ` ml-3 text-[23px] ${
+                  ` ml-3 text-[26px] ${
                     isActive ? " text-white" : "text-[#868E96]"
                   }`
                 }
@@ -42,7 +42,7 @@ export default function Sidebar() {
             <NavLink
               to="/reports"
               className={({ isActive }) =>
-                `w-full h-[40px] rounded-[6px] flex items-center text-[15px] font-semibold gap-3 ${
+                `w-full h-[40px] rounded-[6px] flex items-center text-[18px] font-semibold gap-3 ${
                   isActive
                     ? "bg-[#4263EB] text-white"
                     : "text-black hover:bg-[#4263EB] hover:text-white"
@@ -51,7 +51,7 @@ export default function Sidebar() {
             >
               <PiPaperPlaneTiltBold
                 className={({ isActive }) =>
-                  ` ml-3 text-[23px] ${
+                  ` ml-3 text-[26px] ${
                     isActive ? " text-white" : "text-[#868E96]"
                   }`
                 }
@@ -62,7 +62,7 @@ export default function Sidebar() {
             <NavLink
               to="/wallet"
               className={({ isActive }) =>
-                `w-full h-[40px] rounded-[6px] flex items-center text-[15px] font-semibold gap-3 ${
+                `w-full h-[40px] rounded-[6px] flex items-center text-[18px] font-semibold gap-3 ${
                   isActive
                     ? "bg-[#4263EB] text-white"
                     : "text-black hover:bg-[#4263EB] hover:text-white"
@@ -71,7 +71,7 @@ export default function Sidebar() {
             >
               <BiWallet
                 className={({ isActive }) =>
-                  ` ml-3 text-[23px] ${
+                  ` ml-3 text-[26px] ${
                     isActive ? " text-white" : "text-[#868E96]"
                   }`
                 }
@@ -82,7 +82,7 @@ export default function Sidebar() {
             <NavLink
               to="/pricing"
               className={({ isActive }) =>
-                `w-full h-[40px] rounded-[6px] flex items-center text-[15px] font-semibold gap-3 ${
+                `w-full h-[40px] rounded-[6px] flex items-center text-[18px] font-semibold gap-3 ${
                   isActive
                     ? "bg-[#4263EB] text-white"
                     : "text-black hover:bg-[#4263EB] hover:text-white"
@@ -91,7 +91,7 @@ export default function Sidebar() {
             >
               <HiOutlineShoppingCart
                 className={({ isActive }) =>
-                  ` ml-3 text-[23px] ${
+                  ` ml-3 text-[26px] ${
                     isActive ? " text-white" : "text-[#868E96]"
                   }`
                 }
@@ -102,7 +102,7 @@ export default function Sidebar() {
             <NavLink
               to="/profile"
               className={({ isActive }) =>
-                `w-full h-[40px] rounded-[6px] flex items-center text-[15px] font-semibold gap-3 ${
+                `w-full h-[40px] rounded-[6px] flex items-center text-[18px] font-semibold gap-3 ${
                   isActive
                     ? "bg-[#4263EB] text-white"
                     : "text-black hover:bg-[#4263EB] hover:text-white"
@@ -111,7 +111,7 @@ export default function Sidebar() {
             >
               <TbChartDonut
                 className={({ isActive }) =>
-                  ` ml-3 text-[23px] ${
+                  ` ml-3 text-[26px] ${
                     isActive ? " text-white" : "text-[#868E96]"
                   }`
                 }
@@ -122,7 +122,7 @@ export default function Sidebar() {
             <NavLink
               to="/developer"
               className={({ isActive }) =>
-                `w-full h-[40px] rounded-[6px] flex items-center text-[15px] font-semibold gap-3 ${
+                `w-full h-[40px] rounded-[6px] flex items-center text-[18px] font-semibold gap-3 ${
                   isActive
                     ? "bg-[#4263EB] text-white"
                     : "text-black hover:bg-[#4263EB] hover:text-white"
@@ -131,7 +131,7 @@ export default function Sidebar() {
             >
               <TbUsers
                 className={({ isActive }) =>
-                  ` ml-3 text-[23px] ${
+                  ` ml-3 text-[26px] ${
                     isActive ? " text-white" : "text-[#868E96]"
                   }`
                 }
@@ -140,20 +140,20 @@ export default function Sidebar() {
             </NavLink>
           </div>
         </div>
-        <div className="flex flex-col gap-2 ">
+        <div className="flex flex-col gap-4 ">
           <div className="bg-[#f8fafc] h-[auto] pb-5 w-[100%] rounded-[9px] ">
             <div className=" flex justify-between  px-[10%] pt-4">
-              <span className="text-[15px] font-semibold ">Your plan</span>
+              <span className="text-[18px] font-semibold ">Your plan</span>
               <span>
-                <img src={close} alt="close" className="h-[17px] w-[17px]" />
+                {/* <img src={close} alt="close" className="h-[20px] w-[20px]" /> */}
               </span>
             </div>
             <div className=" flex flex-col px-[10%] pt-5 gap-[5px]  ">
               <div className="flex justify-between ">
-                <span className="text-[13px] font-medium text-[#495057]">
+                <span className="text-[16px] font-medium text-[#495057]">
                   Units left{" "}
                 </span>
-                <span className="text-[13px] font-medium text-[#495057]">
+                <span className="text-[16px] font-medium text-[#495057]">
                   100
                 </span>
               </div>
@@ -162,10 +162,10 @@ export default function Sidebar() {
               </div>
 
               <div className="flex justify-between  mt-[8px]">
-                <span className="text-[13px] font-medium text-[#495057]">
+                <span className="text-[16px] font-medium text-[#495057]">
                   Total requests
                 </span>
-                <span className="text-[13px] font-medium text-[#495057]">
+                <span className="text-[16px] font-medium text-[#495057]">
                   50
                 </span>
               </div>
@@ -178,7 +178,7 @@ export default function Sidebar() {
           <NavLink
             to="/support"
             className={({ isActive }) =>
-              `w-full h-[40px] rounded-[6px] flex items-center text-[15px] font-semibold gap-3 ${
+              `w-full h-[40px] rounded-[6px] flex items-center text-[18px] font-semibold gap-3 ${
                 isActive
                   ? "bg-[#4263EB] text-white"
                   : "text-black hover:bg-[#4263EB] hover:text-white"
@@ -187,7 +187,7 @@ export default function Sidebar() {
           >
             <MdOutlineSupportAgent
               className={({ isActive }) =>
-                ` ml-3 text-[23px] ${
+                ` ml-3 text-[26px] ${
                   isActive ? " text-white" : "text-[#868E96]"
                 }`
               }
@@ -198,7 +198,7 @@ export default function Sidebar() {
           <NavLink
             to="/api-console"
             className={({ isActive }) =>
-              `w-full h-[40px] rounded-[6px] flex items-center text-[15px] font-semibold gap-3 ${
+              `w-full h-[40px] rounded-[6px] flex items-center text-[18px] font-semibold gap-3 ${
                 isActive
                   ? "bg-[#4263EB] text-white"
                   : "text-black hover:bg-[#4263EB] hover:text-white"
@@ -207,7 +207,7 @@ export default function Sidebar() {
           >
             <IoSettingsSharp
               className={({ isActive }) =>
-                ` ml-3 text-[23px] ${
+                ` ml-3 text-[26px] ${
                   isActive ? " text-white" : "text-[#868E96]"
                 }`
               }

@@ -18,6 +18,7 @@ import ProtectedLayout from "./ProtectedLayout";
 import SuccessPage from "./SuccessPage";
 import PaymentFailed from "./FailedPage";
 import PaymentSuccess from "./SuccessPage";
+import PaymentIframePage from "./PaymentIframePage";
 
 export default function App() {
   return (
@@ -37,13 +38,12 @@ export default function App() {
             <Route path="/newpassword" element={<Newpassword />} />
             <Route path="/failedpage" element={<PaymentFailed />} />
             <Route path="/successpage" element={<PaymentSuccess />} />
-
+            <Route path="/payment-iframe" element={<PaymentIframePage />} />
             {/* Protected Routes */}
             <Route
               element={
                 <ProtectedRoute>
                   <ProtectedLayout />{" "}
-                  {/* Wrap protected routes with this layout */}
                 </ProtectedRoute>
               }
             >

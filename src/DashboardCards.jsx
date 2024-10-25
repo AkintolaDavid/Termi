@@ -39,58 +39,58 @@ export default function DashboardCards() {
 
   return (
     <div className="flex w-[100%] justify-between">
-      <div className=" rounded-[12px] bg-white w-[31%] h-[160px] flex items-center border-[#ECE9FEEA] border-[1px]">
-        <div className="w-[90%] flex flex-col ml-[5%] gap-2">
+      <div className=" rounded-[12px] bg-white w-[31%] h-[200px] flex items-center border-[#ECE9FEEA] border-[1px]">
+        <div className="w-[90%] flex flex-col ml-[5%] gap-5">
           <div className=" flex  justify-between">
-            <img src={icon1} alt="icon" className="h-[44px] w-[44px]" />{" "}
-            <img src={dots} alt="icon" className="h-[20px] w-[20px]" />
+            <img src={icon1} alt="icon" className="h-[50px] w-[50px]" />{" "}
+            {/* <img src={dots} alt="icon" className="h-[20px] w-[20px]" /> */}
           </div>
           <div>
-            <span className="text-[14px] text-[#495057] font-medium">
+            <span className="text-[18px] text-[#495057] font-medium">
               Wallet Balance
             </span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-[28px] font-semibold"> ₦{walletBalance}</span>
-            <button className="flex rounded-[6px] items-center h-[32px] w-[100px] bg-[#4263EB] justify-center text-white  text-[14px]">
+            <button className="flex rounded-[6px] items-center h-[38px] w-[115px] bg-[#4263EB] justify-center text-white  text-[16px]">
               <Link to="/wallet"> Fund wallet</Link>
             </button>
           </div>
         </div>
       </div>
-      <div className=" rounded-[12px] bg-white w-[31%] h-[160px] flex items-center border-[#ECE9FEEA] border-[1px]">
-        <div className="w-[90%] flex flex-col ml-[5%] gap-2">
+      <div className=" rounded-[12px] bg-white w-[31%] h-[200px] flex items-center border-[#ECE9FEEA] border-[1px]">
+        <div className="w-[90%] flex flex-col ml-[5%] gap-5">
           <div className=" flex  justify-between">
-            <img src={icon2} alt="icon" className="h-[44px] w-[44px]" />{" "}
-            <img src={dots} alt="icon" className="h-[20px] w-[20px]" />
+            <img src={icon2} alt="icon" className="h-[50px] w-[50px]" />{" "}
+            {/* <img src={dots} alt="icon" className="h-[20px] w-[20px]" /> */}
           </div>
           <div>
-            <span className="text-[14px] text-[#495057] font-medium">
+            <span className="text-[18px] text-[#495057] font-medium">
               {" "}
               Total SMS Sent{" "}
             </span>
           </div>
           <div className="flex justify-between  items-center">
             <span className="text-[28px] font-semibold">5,691</span>
-            <img src={badge} alt="badge" className="h-[21px] w-[63px]" />
+            <img src={badge} alt="badge" className="h-[25px] w-[70px]" />
           </div>
         </div>
       </div>
-      <div className=" rounded-[12px] bg-white w-[31%] h-[160px] flex items-center border-[#ECE9FEEA] border-[1px]">
-        <div className="w-[90%] flex flex-col ml-[5%] gap-2">
+      <div className=" rounded-[12px] bg-white w-[31%] h-[200px] flex items-center border-[#ECE9FEEA] border-[1px]">
+        <div className="w-[90%] flex flex-col ml-[5%] gap-5">
           <div className=" flex  justify-between">
-            <img src={icon3} alt="icon" className="h-[44px] w-[44px]" />{" "}
-            <img src={dots} alt="icon" className="h-[20px] w-[20px]" />
+            <img src={icon3} alt="icon" className="h-[50px] w-[50px]" />{" "}
+            {/* <img src={dots} alt="icon" className="h-[20px] w-[20px]" /> */}
           </div>
           <div>
-            <span className="text-[14px] text-[#495057] font-medium">
+            <span className="text-[18px] text-[#495057] font-medium">
               Carts recovered
             </span>
           </div>
 
           <div className="flex justify-between items-center">
             <span className="text-[28px] font-semibold">920</span>
-            <img src={badge} alt="badge" className="h-[21px] w-[63px]" />
+            <img src={badge} alt="badge" className="h-[25px] w-[70px]" />
           </div>
         </div>
       </div>

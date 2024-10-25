@@ -122,7 +122,7 @@ export default function Header() {
             {showdropdown && (
               <div
                 onClick={handleLogout}
-                className="rounded-[10px] text-xl absolute flex text-red-600 font-medium items-center justify-center bg-white h-[60px] w-[240px] top-[80px] border-[1px] border-gray-400"
+                className="rounded-[10px] text-xl absolute flex text-red-600 font-medium items-center justify-center bg-white h-[60px] w-[300px] top-[90px] border-[1px] border-gray-400"
               >
                 Logout
               </div>

@@ -171,10 +171,10 @@ export default function Profile() {
       <div className="w-full h-[calc(100vh-94px)] flex justify-center bg-[#f8fafc]">
         <div className="w-[95%] h-[92.5%] mt-[2.5%] bg-white flex flex-col pl-6 pt-5 gap-5">
           <div className="flex flex-col">
-            <span className="text-[20px] font-semibold">
+            <span className="text-[24px] font-semibold">
               Account Information
             </span>
-            <span className="text-[16px] text-[#929EAE]">
+            <span className="text-[18px] text-[#929EAE]">
               Update your account information
             </span>
           </div>
@@ -213,7 +213,7 @@ export default function Profile() {
                     value={formData.firstname}
                     onChange={handleInputChange}
                     required
-                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
+                    className="h-[45px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="Ayodele"
                   />
                 </div>
@@ -226,7 +226,7 @@ export default function Profile() {
                     value={formData.lastname}
                     onChange={handleInputChange}
                     required
-                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
+                    className="h-[45px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="Frank"
                   />
                 </div>
@@ -242,7 +242,7 @@ export default function Profile() {
                     name="dob"
                     onChange={handleInputChange}
                     required
-                    className="h-[50px] text-[#78778B] w-[340px] pl-3 pr-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
+                    className="h-[45px] text-[#78778B] w-[340px] pl-3 pr-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="27/09/1998"
                   />
                 </div>
@@ -254,7 +254,7 @@ export default function Profile() {
                     name="mobile"
                     onChange={handleInputChange}
                     required
-                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
+                    className="h-[45px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="+123 456 7890"
                   />
                 </div>
@@ -270,7 +270,7 @@ export default function Profile() {
                     name="email"
                     onChange={handleInputChange}
                     required
-                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
+                    className="h-[45px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="example@domain.com"
                   />
                 </div>
@@ -282,7 +282,7 @@ export default function Profile() {
                     name="country"
                     onChange={handleInputChange}
                     required
-                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
+                    className="h-[45px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="Country"
                   />
                 </div>
@@ -297,7 +297,7 @@ export default function Profile() {
                     name="state"
                     onChange={handleInputChange}
                     required
-                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
+                    className="h-[45px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="State"
                   />
                 </div>
@@ -309,7 +309,7 @@ export default function Profile() {
                     name="location"
                     onChange={handleInputChange}
                     required
-                    className="h-[50px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
+                    className="h-[45px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                     placeholder="Location"
                   />
                 </div>
@@ -318,7 +318,7 @@ export default function Profile() {
               <div className="mt-5 flex justify-between">
                 <button
                   type="submit"
-                  className="bg-[#4263EB] text-white w-[700px] text-[16px] mt-6 h-[50px] rounded-[10px]"
+                  className="bg-[#4263EB] text-white w-[700px] text-[16px] mt-6 h-[45px] rounded-[10px]"
                   disabled={loading}
                 >
                   {loading ? (
@@ -339,7 +339,7 @@ export default function Profile() {
               {/* Security Form Fields */}
               <div>
                 <span className="font-medium text-[18px] flex mb-5">
-                  Settings
+                  Security
                 </span>
               </div>
               {/* <div className="flex flex-col gap-1">
@@ -352,7 +352,7 @@ export default function Profile() {
                   value={securityData.oldPassword}
                   onChange={handleSecurityChange}
                   required
-                  className="h-[50px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
+                  className="h-[45px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                   placeholder="Enter your old password"
                 />
               </div> */}
@@ -367,7 +367,7 @@ export default function Profile() {
                   value={securityData.password} // Updated value
                   onChange={handleSecurityChange}
                   required
-                  className="h-[50px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
+                  className="h-[45px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                   placeholder="Enter your new password"
                 />
               </div>
@@ -382,14 +382,14 @@ export default function Profile() {
                   value={securityData.password_confirmation} // Updated value
                   onChange={handleSecurityChange}
                   required
-                  className="h-[50px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
+                  className="h-[45px] text-[#78778B] w-[100%] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                   placeholder="Repeat your new password"
                 />
               </div>
 
               <button
                 type="submit"
-                className="bg-[#4263EB] text-white w-[700px] text-[16px] mt-6 h-[50px] rounded-[10px]"
+                className="bg-[#4263EB] text-white w-[700px] text-[16px] mt-6 h-[45px] rounded-[10px]"
                 disabled={loading}
               >
                 {loading ? (

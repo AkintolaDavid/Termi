@@ -89,7 +89,7 @@ export default function Signin() {
                 Email
               </label>
               <input
-                type="text"
+                type="email"
                 value={login}
                 onChange={(e) => setEmail(e.target.value)}
                 className="h-12 text-[#7E868E] pl-3 rounded-[6px] text-[14px] border-[1px] border-[#E4E6EA]"

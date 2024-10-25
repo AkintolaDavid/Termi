@@ -118,17 +118,17 @@ export default function Wallet() {
                 {modalType === "fundWallet" ? (
                   <>
                     <div className="w-[90%]">
-                      <Text className="text-[20px] font-semibold text-left">
+                      <Text className="text-[22px] font-semibold text-left">
                         Fund Wallet
                       </Text>
                     </div>
                     <div className="flex flex-col w-[500px] gap-1">
-                      <label className="text-[13px] font-medium text-[#425466]">
+                      <label className="text-[16px] font-medium text-[#425466] mb-[4px]">
                         Enter Amount
                       </label>
                       <input
                         type="number"
-                        className="h-[38px] text-[#7E868E] pl-3 rounded-[6px] text-[13px] border-[1px] border-[#E4E6EA]"
+                        className="h-[45px] text-[#7E868E] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
                         placeholder="Enter amount"
                         value={fundAmount}
                         onChange={(e) => setFundAmount(e.target.value)}
@@ -153,10 +153,10 @@ export default function Wallet() {
                         Let’s Create a Virtual Account{" "}
                       </span>
                       <div className="flex flex-col">
-                        <span className="text-[20px] font-semibold">
+                        <span className="text-[22px] font-semibold">
                           BVN Details
                         </span>
-                        <span className="text-[13px] font-normal">
+                        <span className="text-[15px] font-normal">
                           We need your BVN details to create a wallet and
                           virtual account for you.{" "}
                         </span>
@@ -164,32 +164,32 @@ export default function Wallet() {
                     </div>
 
                     <div className="flex flex-col w-[400px] gap-1">
-                      <label className="text-[14px] font-normal text-[#425466]">
+                      <label className="text-[16px] font-normal text-[#425466] mb-[4px]">
                         Bank Verification Number (BVN)
                       </label>
                       <input
                         type="number"
-                        className="h-[38px] text-[#7E868E] pl-3 rounded-[12px] text-[14px]  border-[1px] border-[#E0E0E0]"
+                        className="h-[45px] text-[#7E868E] pl-3 rounded-[6px] text-[16px]  border-[1px] border-[#E0E0E0]"
                         placeholder="Enter BVN"
                       />
                     </div>
                     <div className="flex flex-col w-[400px] gap-1">
-                      <label className="text-[14px] font-normal text-[#425466]">
+                      <label className="text-[16px] font-normal text-[#425466] mb-[4px]">
                         Phone number
                       </label>
                       <input
                         type="tel"
-                        className="h-[38px] text-[#7E868E] pl-3 rounded-[12px] text-[14px]  border-[1px] border-[#E0E0E0]"
+                        className="h-[45px] text-[#7E868E] pl-3 rounded-[6px] text-[16px]  border-[1px] border-[#E0E0E0]"
                         placeholder="Enter phone number"
                       />
                     </div>
                     <div className="flex flex-col w-[400px] gap-1">
-                      <label className="text-[14px] font-normal text-[#425466]">
+                      <label className="text-[16px] font-normal text-[#425466] mb-[4px]">
                         Date of Birth
                       </label>
                       <input
                         type="date"
-                        className="h-[38px] pr-3 text-[#7E868E] pl-4 rounded-[12px] text-[14px]  border-[1px] border-[#E0E0E0]"
+                        className="h-[45px] pr-3 text-[#7E868E] pl-4 rounded-[6px] text-[16px]  border-[1px] border-[#E0E0E0]"
                         placeholder="Enter Date of Birth"
                       />
                     </div>
@@ -201,6 +201,7 @@ export default function Wallet() {
                       _hover={{ bg: "#4263EB" }}
                       rounded="10px"
                       onClick={handleBVN}
+                      marginTop="5px"
                     >
                       Verify
                     </Button>
@@ -236,14 +237,14 @@ export default function Wallet() {
 
           {approved ? (
             <div className="mr-28 flex flex-col gap-2">
-              <span className="text-[20px] font-semibold">
+              <span className="text-[20px] font-semibold mb-2">
                 Virtual Account Details
               </span>
               <div className="flex">
-                <div className="text-[#57585A] text-[14px] font-medium w-[120px]">
+                <div className="text-[#57585A] text-[16px] font-medium w-[150px]">
                   Bank:
                 </div>
-                <div className="flex items-center text-[14px]">
+                <div className="flex items-center text-[16px]">
                   {bank}
                   <img
                     src={copy}
@@ -254,10 +255,10 @@ export default function Wallet() {
                 </div>
               </div>
               <div className="flex">
-                <div className="text-[#57585A] text-[14px] font-medium w-[120px]">
+                <div className="text-[#57585A] text-[16px] font-medium w-[150px]">
                   Account No:
                 </div>
-                <div className="flex items-center text-[14px]">
+                <div className="flex items-center text-[16px]">
                   {accountNumber}
                   <img
                     src={copy}
@@ -268,10 +269,10 @@ export default function Wallet() {
                 </div>
               </div>
               <div className="flex">
-                <div className="text-[#57585A] text-[14px] font-medium w-[120px]">
+                <div className="text-[#57585A] text-[16px] font-medium w-[150px]">
                   Account Name:
                 </div>
-                <div className="flex items-center text-[14px]">
+                <div className="flex items-center text-[16px]">
                   {accountName}
                   <img
                     src={copy}
