@@ -30,7 +30,7 @@ export default function PaymentSuccess() {
 
       <div className="mt-8">
         <button
-          onClick={() => navigate("/dashboard")} // Replace with your redirect URL
+          onClick={() => navigate("/walletproceed")} // Replace with your redirect URL
           className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
         >
           Go to Dashboard
