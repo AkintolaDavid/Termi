@@ -8,7 +8,7 @@ export default function PaymentSuccess() {
   // Redirect after 5 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/dashboard"); // Replace with your redirect URL
+      navigate("/walletproceed"); // Replace with your redirect URL
     }, 5000);
 
     // Cleanup the timer on component unmount
