@@ -8,7 +8,7 @@ export default function PaymentFailed() {
   // Redirect after 5 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate(-2); // This will go back two steps in the navigation history
+      navigate("/wallet"); // Replace with your retry payment URL
     }, 5000);
 
     // Cleanup the timer on component unmount
@@ -30,7 +30,7 @@ export default function PaymentFailed() {
 
       <div className="mt-8">
         <button
-          onClick={() => navigate(-2)} // Replace with your retry payment URL
+          onClick={() => navigate("/wallet")} // Replace with your retry payment URL
           className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
         >
           Retry Payment
