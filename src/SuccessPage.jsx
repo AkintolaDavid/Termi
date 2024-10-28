@@ -5,10 +5,10 @@ import { FaCheckCircle } from "react-icons/fa";
 export default function PaymentSuccess() {
   const navigate = useNavigate();
 
-  // Redirect after 5 seconds
+  // Redirect to the wallet page after 5 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/walletproceed"); // Replace with your redirect URL
+      navigate("/wallet"); // Redirect to the specified URL
     }, 5000);
 
     // Cleanup the timer on component unmount
@@ -30,7 +30,7 @@ export default function PaymentSuccess() {
 
       <div className="mt-8">
         <button
-          onClick={() => navigate("/walletproceed")} // Replace with your redirect URL
+          onClick={() => navigate("/wallet")} // Navigate to the wallet page
           className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
         >
           Go to Dashboard

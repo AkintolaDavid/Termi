@@ -15,7 +15,6 @@ import WalletProceed from "./WalletProceed";
 import Wallet from "./Wallet";
 import Profile from "./Profile";
 import ProtectedLayout from "./ProtectedLayout";
-import SuccessPage from "./SuccessPage";
 import PaymentFailed from "./FailedPage";
 import PaymentSuccess from "./SuccessPage";
 import PaymentIframePage from "./PaymentIframePage";
