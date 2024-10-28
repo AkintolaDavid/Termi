@@ -120,9 +120,9 @@ export default function Signin() {
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-[13px] text-[#8F90AD]">
+                {/* <span className="text-[13px] text-[#8F90AD]">
                   Must be at least 8 characters
-                </span>
+                </span> */}
                 <Link to="/resetpassword">
                   <span className="text-[13px] text-[#8F90AD] underline underline-offset-1">
                     Forgot password?

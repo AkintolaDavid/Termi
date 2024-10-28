@@ -36,8 +36,7 @@ export default function App() {
             />
             <Route path="/verifyotpsignup" element={<VerifyOtpSignup />} />
             <Route path="/newpassword" element={<Newpassword />} />
-            <Route path="/failedpage" element={<PaymentFailed />} />
-            <Route path="/successpage" element={<PaymentSuccess />} />
+
             <Route path="/payment-iframe" element={<PaymentIframePage />} />
             {/* Protected Routes */}
             <Route
@@ -52,6 +51,8 @@ export default function App() {
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/walletproceed" element={<WalletProceed />} />
               <Route path="/api-console" element={<ApiConsole />} />
+              <Route path="/failedpage" element={<PaymentFailed />} />
+              <Route path="/successpage" element={<PaymentSuccess />} />
             </Route>
           </Routes>
         </BrowserRouter>

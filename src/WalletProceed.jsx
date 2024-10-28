@@ -1,36 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useToast, CircularProgress } from "@chakra-ui/react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalBody,
-  Text,
-  Button,
-} from "@chakra-ui/react";
 import checkIcon from "./assets/cards/check.png";
 import uncheckIcon from "./assets/cards/uncheck.png";
 import paystackLogo from "./assets/paystack.png";
 import flutterwaveLogo from "./assets/flutterwave.png";
-import { useDisclosure } from "@chakra-ui/react";
 
 import Header from "./Header";
 
 export default function PaymentComponent() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const location = useLocation();
   const { amount } = location.state; // Amount passed through location.state
   const [selectedMethod, setSelectedMethod] = useState(null); // Track selected method
   const [loading, setLoading] = useState(false); // Loading state for button
-  const [paymentUrl, setPaymentUrl] = useState(null); // For handling iframe
-  const [showIframe, setShowIframe] = useState(false); // Track iframe visibility
   const toast = useToast();
   const token = localStorage.getItem("token"); // Ensure a valid token is set in localStorage
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // For navigating to payment URL
 
   // Validate the amount before initiating the payment
   const validateAmount = () => {
@@ -69,14 +56,14 @@ export default function PaymentComponent() {
       if (response.data.status) {
         toast({
           title: "Paystack Payment initiated",
-          description: "Loading Paystack payment page.",
+          description: "Redirecting to Paystack payment page.",
           status: "success",
           duration: 6000,
           position: "top",
           isClosable: true,
         });
-        setPaymentUrl(response.data.data[0].url);
-        // window.open(response.data.data[0].url, "_blank");
+        // Redirect to Paystack payment URL
+        window.location.href = response.data.data[0].url; // Change to window.location.href for redirection
       } else {
         toast({
           title: "Payment failed",
@@ -103,7 +90,6 @@ export default function PaymentComponent() {
     }
   };
 
-  // Function to handle Flutterwave payment initialization
   const initiateFlutterwavePayment = async () => {
     setLoading(true);
 
@@ -127,14 +113,14 @@ export default function PaymentComponent() {
       if (response.data.status) {
         toast({
           title: "Flutterwave Payment initiated",
-          description: "Loading Flutterwave payment page.",
+          description: "Redirecting to Flutterwave payment page.",
           status: "success",
           position: "top",
           duration: 6000,
           isClosable: true,
         });
-
-        window.open(response.data.data.url, "_blank"); // Opens the URL in a new tab
+        // Redirect to Flutterwave payment URL
+        window.location.href = response.data.data.url; // Change to window.location.href for redirection
       } else {
         toast({
           title: "Payment failed",
@@ -161,11 +147,6 @@ export default function PaymentComponent() {
     }
   };
 
-  useEffect(() => {
-    setPaymentUrl(null);
-    // Reset iframe state when payment method changes
-  }, [selectedMethod]);
-
   return (
     <div className="bg-[#f8fafc] w-[100%] h-[100%]">
       <Header />
@@ -175,25 +156,6 @@ export default function PaymentComponent() {
         </Link>
       </div>
       <div className="flex justify-between ml-[2.5%] mr-[4%]">
-        <Modal isCentered isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalCloseButton />
-            <ModalBody
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              padding="0" // Remove padding to maximize iframe space
-            >
-              <iframe
-                src={paymentUrl}
-                style={{ width: "100%", height: "600px", border: "none" }} // Make iframe width 100% of the modal
-                title="Payment"
-              ></iframe>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-
         <div className="w-[70%] bg-[#ffffff] h-[auto]">
           {/* Paystack Method Selection */}
           <div
@@ -262,7 +224,7 @@ export default function PaymentComponent() {
         </div>
         <div className="w-[25%]">
           <div className="flex flex-col items-center justify-center bg-white w-[370px] h-[200px] text-[20px] font-medium gap-4 rounded-[8px]">
-            <p className="text-[20px] text-[#5D5F5F]">Wallet Funding</p>{" "}
+            <p className="text-[20px] text-[#5D5F5F]">Wallet Funding</p>
             <div className="flex justify-between w-[70%]">
               <span className="text-[#5D5F5F]">Total</span>
               <span className="text-[#5D5F5F]">₦{amount}</span>
@@ -283,7 +245,6 @@ export default function PaymentComponent() {
                 // Trigger appropriate payment function based on the selected method
                 if (selectedMethod === "paystack") {
                   initiatePaystackPayment();
-                  onOpen();
                 } else if (selectedMethod === "flutterwave") {
                   initiateFlutterwavePayment();
                 }
@@ -295,18 +256,14 @@ export default function PaymentComponent() {
                 backgroundColor: "#4263EB",
                 color: "white",
                 border: "none",
-                borderRadius: "8px",
+                borderRadius: "5px",
+                cursor: loading ? "not-allowed" : "pointer",
               }}
-              className="h-[43px] w-[300px] bg-[#4263EB] text-[16px] text-white rounded-[8px] mt-10"
             >
               {loading ? (
-                <CircularProgress
-                  isIndeterminate
-                  color="blue.300"
-                  size="24px"
-                />
+                <CircularProgress isIndeterminate size="24px" color="white" />
               ) : (
-                "Proceed with Payment"
+                "Proceed to Pay"
               )}
             </button>
           </div>
