@@ -21,7 +21,7 @@ export default function PaymentSuccess() {
         <FaCheckCircle size={80} />
       </div>
       <h1 className="text-4xl font-bold mt-4 text-gray-800">
-        Payment Successful!aaa
+        Payment Successful!
       </h1>
       <p className="text-gray-600 mt-2">Thank you for your payment.</p>
       <p className="text-gray-600">
