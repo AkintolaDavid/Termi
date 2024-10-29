@@ -4,6 +4,7 @@ import RecentTransactions from "./RecentTransactions";
 import trans from "./assets/cards/trans.png";
 import copy from "./assets/cards/copy.png";
 import { useDisclosure } from "@chakra-ui/react";
+import { CircularProgress } from "@chakra-ui/react";
 import {
   Modal,
   ModalOverlay,
@@ -19,19 +20,57 @@ import axios from "axios"; // Import axios for API calls
 
 export default function Wallet() {
   const toast = useToast();
-  const bank = "Providus Bank";
-  const accountNumber = "1234567890"; // Example account number
-  const accountName = "Abiola Ogunjobi"; // Example account name
+  const [bank, setBank] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [accountName, setAccountName] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const OverlayOne = () => <ModalOverlay bg="#C2C2C3" />;
   const [overlay, setOverlay] = useState(<OverlayOne />);
-  const [approved, setapproved] = useState(false);
+  const [approved, setapproved] = useState("");
+  const [displaystatus, setdisplaystatus] = useState("");
   const [modalType, setModalType] = useState("");
   const [walletBalance, setWalletBalance] = useState(0); // State to hold wallet balance
   const [fundAmount, setFundAmount] = useState(""); // Amount to be funded by the user
   const navigate = useNavigate();
-
+  const [bvn, setBvn] = useState("");
+  const [date_of_birth, setdate_of_birth] = useState("");
+  const [mobile_number, setmobile_number] = useState("");
+  const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token"); // Assuming token is stored in local storage
+
+  useEffect(() => {
+    const userprofile = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/user/profile`,
+          {
+            headers: { Authorization: `Bearer ${token}` }, // Pass the token in the headers
+          }
+        );
+        if (response.data.data.virtual_account) {
+          setapproved(true);
+          setBank(response.data.data.virtual_account.bank_name);
+          setAccountNumber(response.data.data.virtual_account.account_number);
+          setAccountName(response.data.data.virtual_account.account_name);
+        }
+        if (response.data.data.virtual_account.display_status) {
+          setdisplaystatus(true);
+        }
+        // setWalletBalance(response.data.data.wallet.balance);
+      } catch (error) {
+        console.error("Error fetching wallet balance:", error);
+        toast({
+          title: "Error fetching balance",
+          description: "Unable to retrieve wallet balance.",
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      }
+    };
+
+    userprofile();
+  }, [token, toast]);
   useEffect(() => {
     const fetchWalletBalance = async () => {
       try {
@@ -66,16 +105,56 @@ export default function Wallet() {
   };
 
   // Handle creating a virtual account
-  const handleBVN = () => {
-    setapproved(true);
-    onClose(); // Close the modal
-    toast({
-      title: "Virtual account created successfully!",
-      status: "success",
-      duration: 4000,
-      isClosable: true,
-    });
-    navigate("/wallet"); // Navigate to wallet
+  const handleBVN = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/user/generate_virtual_account`,
+        {
+          bvn,
+          date_of_birth,
+          mobile_number,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+      if (response.status === 200) {
+        toast({
+          title: "Virtual account created successfully!",
+          status: "success",
+          duration: 4000,
+          isClosable: true,
+        });
+        onClose();
+        navigate("/wallet");
+      }
+    } catch (error) {
+      const errorResponse = error.response?.data;
+      console.log(errorResponse);
+      let errorMessage = "Login failed";
+      if (errorResponse) {
+        if (errorResponse?.error?.bvn) {
+          errorMessage = "Enter a valid 11 digit BVN number";
+        } else if (errorResponse.message) {
+          // errorMessage = "Please enter a valid phone number";
+          errorMessage = errorResponse.message;
+        }
+      }
+      toast({
+        title: errorMessage,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Handle Fund Wallet
@@ -171,6 +250,9 @@ export default function Wallet() {
                         type="number"
                         className="h-[45px] text-[#7E868E] pl-3 rounded-[6px] text-[16px]  border-[1px] border-[#E0E0E0]"
                         placeholder="Enter BVN"
+                        value={bvn}
+                        onChange={(e) => setBvn(e.target.value)}
+                        required
                       />
                     </div>
                     <div className="flex flex-col w-[400px] gap-1">
@@ -181,6 +263,9 @@ export default function Wallet() {
                         type="tel"
                         className="h-[45px] text-[#7E868E] pl-3 rounded-[6px] text-[16px]  border-[1px] border-[#E0E0E0]"
                         placeholder="Enter phone number"
+                        value={mobile_number}
+                        onChange={(e) => setmobile_number(e.target.value)}
+                        required
                       />
                     </div>
                     <div className="flex flex-col w-[400px] gap-1">
@@ -191,6 +276,9 @@ export default function Wallet() {
                         type="date"
                         className="h-[45px] pr-3 text-[#7E868E] pl-4 rounded-[6px] text-[16px]  border-[1px] border-[#E0E0E0]"
                         placeholder="Enter Date of Birth"
+                        value={date_of_birth}
+                        onChange={(e) => setdate_of_birth(e.target.value)}
+                        required
                       />
                     </div>
                     <Button
@@ -203,7 +291,15 @@ export default function Wallet() {
                       onClick={handleBVN}
                       marginTop="5px"
                     >
-                      Verify
+                      {loading ? (
+                        <CircularProgress
+                          isIndeterminate
+                          color="blue.300"
+                          size="24px"
+                        /> // Show loader
+                      ) : (
+                        "   Verify  " // Button text
+                      )}
                     </Button>
                   </div>
                 ) : null}
@@ -236,53 +332,65 @@ export default function Wallet() {
           </div>
 
           {approved ? (
-            <div className="mr-28 flex flex-col gap-2">
-              <span className="text-[20px] font-semibold mb-2">
-                Virtual Account Details
-              </span>
-              <div className="flex">
-                <div className="text-[#57585A] text-[16px] font-medium w-[150px]">
-                  Bank:
+            displaystatus ? (
+              <div className="mr-28 flex flex-col gap-2">
+                <span className="text-[20px] font-semibold mb-2">
+                  Virtual Account Details
+                </span>
+                <div className="flex">
+                  <div className="text-[#57585A] text-[16px] font-medium w-[150px]">
+                    Bank:
+                  </div>
+                  <div className="flex items-center text-[16px]">
+                    {bank}
+                    <img
+                      src={copy}
+                      onClick={() => handleCopy(bank)}
+                      alt="copy"
+                      className="h-[20px] ml-1.5"
+                    />
+                  </div>
                 </div>
-                <div className="flex items-center text-[16px]">
-                  {bank}
-                  <img
-                    src={copy}
-                    onClick={() => handleCopy(bank)}
-                    alt="copy"
-                    className="h-[20px] ml-1.5"
-                  />
+                <div className="flex">
+                  <div className="text-[#57585A] text-[16px] font-medium w-[150px]">
+                    Account No:
+                  </div>
+                  <div className="flex items-center text-[16px]">
+                    {accountNumber}
+                    <img
+                      src={copy}
+                      onClick={() => handleCopy(accountNumber)}
+                      alt="copy"
+                      className="h-[20px] ml-1.5"
+                    />
+                  </div>
+                </div>
+                <div className="flex">
+                  <div className="text-[#57585A] text-[16px] font-medium w-[150px]">
+                    Account Name:
+                  </div>
+                  <div className="flex items-center text-[16px]">
+                    {accountName}
+                    <img
+                      src={copy}
+                      onClick={() => handleCopy(accountName)}
+                      alt="copy"
+                      className="h-[20px] ml-1.5"
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="flex">
-                <div className="text-[#57585A] text-[16px] font-medium w-[150px]">
-                  Account No:
-                </div>
-                <div className="flex items-center text-[16px]">
-                  {accountNumber}
-                  <img
-                    src={copy}
-                    onClick={() => handleCopy(accountNumber)}
-                    alt="copy"
-                    className="h-[20px] ml-1.5"
-                  />
-                </div>
+            ) : (
+              <div className="mr-20 flex flex-col items-center justify-center gap-2 mb-3">
+                <span className="text-[22px] font-semibold">
+                  Virtual Account Suspended
+                </span>
+                <span className="text-[#828282] text-[16px] leading-4 w-[300px] text-center">
+                  Your virtual account has been suspended, contact us for more
+                  information
+                </span>
               </div>
-              <div className="flex">
-                <div className="text-[#57585A] text-[16px] font-medium w-[150px]">
-                  Account Name:
-                </div>
-                <div className="flex items-center text-[16px]">
-                  {accountName}
-                  <img
-                    src={copy}
-                    onClick={() => handleCopy(accountName)}
-                    alt="copy"
-                    className="h-[20px] ml-1.5"
-                  />
-                </div>
-              </div>
-            </div>
+            )
           ) : (
             <div className="mr-20 flex flex-col items-center justify-center gap-2 mb-3">
               <span className="text-[22px] font-semibold">
@@ -293,6 +401,7 @@ export default function Wallet() {
                 account
               </span>
               <button
+                disabled={loading}
                 onClick={() => {
                   setOverlay(<OverlayOne />);
                   setModalType("createAccount"); // Set modal type

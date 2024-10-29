@@ -9,8 +9,8 @@ export default function Profile() {
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
+    first_name: "",
+    last_name: "",
     dob: "",
     mobile: "",
     email: "",
@@ -209,8 +209,8 @@ export default function Profile() {
                     Your firstname
                   </label>
                   <input
-                    name="firstname"
-                    value={formData.firstname}
+                    name="first_name"
+                    value={formData.first_name}
                     onChange={handleInputChange}
                     required
                     className="h-[45px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"
@@ -222,8 +222,8 @@ export default function Profile() {
                     Your lastname
                   </label>
                   <input
-                    name="lastname"
-                    value={formData.lastname}
+                    name="last_name"
+                    value={formData.last_name}
                     onChange={handleInputChange}
                     required
                     className="h-[45px] text-[#78778B] w-[340px] pl-3 rounded-[6px] text-[16px] border-[1px] border-[#E4E6EA]"

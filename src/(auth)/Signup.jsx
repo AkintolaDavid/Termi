@@ -196,7 +196,7 @@ export default function Signup() {
             disabled={loading} // Disable button while loading
           >
             {loading ? (
-              <CircularProgress isIndeterminate color="green.300" size="24px" /> // Show loader
+              <CircularProgress isIndeterminate color="blue.300" size="24px" /> // Show loader
             ) : (
               "Register" // Button text
             )}

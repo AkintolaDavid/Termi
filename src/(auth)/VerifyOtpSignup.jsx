@@ -158,7 +158,7 @@ export default function VerifyOtpSignup() {
           Didn't receive otp? Send again
         </span>
 
-        <Link to="/signin" className="mt-3">
+        <Link to="/" className="mt-3">
           <span className="text-[14px] text-[#586979] underline underline-offset-1">
             Already have an account? Login
           </span>
